@@ -1,6 +1,6 @@
 # Changelog
 
-## 3.0.0 — RC1
+## 3.0.0
 
 - Rebuilt the plugin for PHP 8.2+ using strict types and Composer PSR-4 autoloading.
 - Added graceful PHP, WordPress, and dependency guards.
@@ -13,6 +13,14 @@
 - Preserved unknown legacy settings during partial saves.
 - Added scoped advertising HTML filtering at all implemented output boundaries.
 - Added header and footer embed-code output.
-- Added PHPUnit, PHPStan, PHPCS, golden-master, and real-WordPress integration coverage.
+- Uninstall preserves option keys that may belong to a separately installed
+  original "Quick Adsense" plugin (ownership-aware cleanup).
 
-No Pro features, Gutenberg blocks, widgets, ads.txt UI, or release-channel integrations are included in RC1.
+This release does not include Pro features, Gutenberg blocks, sidebar widgets,
+an ads.txt UI, or release-channel integrations.
+
+## History
+
+Version 3.0.0 is the first release of the rebuilt codebase. It continues the
+GPL-licensed "Quick Adsense" plugin (original author: namithjawahar; last
+original release 2.8.7, 2022). See LICENSE.md and CREDITS.md for attribution.

@@ -24,14 +24,18 @@ without requiring theme edits.
 
 ## Requirements
 
-| Requirement       | Minimum |
+| Requirement       | Value   |
 |-------------------|---------|
-| WordPress         | 6.0     |
-| PHP               | 8.2     |
-| Tested up to (WP) | 7.0     |
+| WordPress         | 6.0+    |
+| PHP               | 8.2+    |
+| Tested up to (WP) | 6.7     |
 
 The plugin ships with a generated Composer PSR-4 autoloader in `vendor/`. No
 third-party runtime packages are bundled.
+
+> **Note:** `Tested up to` reflects the newest WordPress release this rebuild has
+> actually been exercised against. Bump it (in `readme.txt` and here) after
+> verifying on the current WordPress release.
 
 ## Installation
 
@@ -51,15 +55,16 @@ work. Back up your site and database before upgrading.
 ## Repository layout
 
 ```
-revguard-for-adsense.php      Plugin bootstrap (environment guard + autoloader + composition root)
-uninstall.php             Uninstall cleanup entry point
-readme.txt                WordPress.org-format readme
-LICENSE.md                Licensing summary and legacy attribution
-CHANGELOG.md              Release notes
-assets/                   Admin CSS
-src/                      Namespaced plugin source (PSR-4)
-views/                    Admin page templates
-vendor/                   Generated Composer autoloader (committed; required at runtime)
+revguard-for-adsense.php   Plugin bootstrap (environment guard + autoloader + composition root)
+uninstall.php              Uninstall cleanup entry point
+readme.txt                 WordPress.org-format readme
+LICENSE.md                 Full licensing and derivative-work attribution
+CREDITS.md                 Credits and attribution detail
+CHANGELOG.md               Release notes
+assets/                    Admin CSS
+src/                       Namespaced plugin source (PSR-4)
+views/                     Admin page templates
+vendor/                    Generated Composer autoloader (committed; required at runtime)
 ```
 
 ## Licensing and attribution
@@ -68,8 +73,23 @@ RevGuard for AdSense is free software distributed under the GNU General Public
 License, version 2 or (at your option) any later version. See
 [`LICENSE.md`](LICENSE.md) and <https://www.gnu.org/licenses/gpl-2.0.html>.
 
-Version 3.0.0 is an independently maintained rebuild by **Abdul Kadir**. It
-carries forward the placement engine and configuration behaviour of the original
-GPL-licensed **Quick Adsense 2.8.7** project; that attribution is retained for
-GPL license compliance, and legacy option keys, control tokens, and widget
-identifiers are preserved so existing installations upgrade cleanly.
+Version 3.0.0 is an independently maintained rebuild by **Abdul Kadir**
+(Copyright © 2026). It is a derivative work of the GPL-licensed **Quick Adsense**
+plugin (original author **namithjawahar**, <https://quickadsense.com/>, last
+original release 2.8.7). The original author's copyright is retained alongside
+the new one, and legacy option keys, control tokens, and widget identifiers are
+preserved so existing installations upgrade cleanly. Full detail in
+[`LICENSE.md`](LICENSE.md) and [`CREDITS.md`](CREDITS.md).
+
+## Before submitting to WordPress.org
+
+- Set `Contributors:` in `readme.txt` to the maintainer's real WordPress.org
+  username (currently the placeholder `your-wordpress-org-username`).
+- Confirm the final public plugin name / slug (this rebuild uses
+  **RevGuard for AdSense** / `revguard-for-adsense`).
+- Re-check `Tested up to` against the current WordPress release.
+
+## Trademarks
+
+"AdSense" and "Google AdSense" are trademarks of Google LLC. This project is not
+affiliated with, endorsed by, or sponsored by Google LLC.
