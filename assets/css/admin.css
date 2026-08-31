@@ -1,0 +1,378 @@
+/*
+ * AdSense RevGuard — admin UI polish.
+ * Presentation only: no logic, no settings behavior, lives entirely in CSS.
+ */
+
+.qa-wrap {
+	--qa-border: #e2e4e7;
+	--qa-bg: #f6f7f7;
+	--qa-card: #ffffff;
+	--qa-text: #1d2327;
+	--qa-muted: #646970;
+	--qa-brand: #2271b1;
+	--qa-brand-dark: #135e96;
+	--qa-success: #00a32a;
+	--qa-radius: 8px;
+	max-width: 1180px;
+	margin: 20px 20px 40px 0;
+	color: var(--qa-text);
+}
+
+.qa-wrap * {
+	box-sizing: border-box;
+}
+
+/* Header */
+.qa-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: 16px;
+	background: var(--qa-card);
+	border: 1px solid var(--qa-border);
+	border-radius: var(--qa-radius);
+	padding: 20px 24px;
+	margin-bottom: 16px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.qa-brand {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.qa-brand-mark {
+	width: 40px;
+	height: 40px;
+	border-radius: 10px;
+	background: linear-gradient(135deg, var(--qa-brand), var(--qa-brand-dark));
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #fff;
+	flex-shrink: 0;
+}
+
+.qa-brand-mark .dashicons {
+	width: 22px;
+	height: 22px;
+	font-size: 22px;
+}
+
+.qa-brand-name {
+	margin: 0;
+	font-size: 20px;
+	line-height: 1.2;
+	font-weight: 600;
+}
+
+.qa-brand-tagline {
+	margin: 2px 0 0;
+	font-size: 13px;
+	color: var(--qa-muted);
+}
+
+.qa-badges {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+.qa-badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	font-size: 12px;
+	font-weight: 600;
+	padding: 4px 10px;
+	border-radius: 999px;
+	line-height: 1.6;
+	white-space: nowrap;
+}
+
+.qa-badge-version {
+	background: #f0f0f1;
+	color: var(--qa-muted);
+}
+
+.qa-badge-free {
+	background: #edfaef;
+	color: var(--qa-success);
+}
+
+.qa-badge-pro {
+	background: #fdf2e3;
+	color: #a5650a;
+	text-decoration: none;
+	border: 1px solid #f3dcb4;
+}
+
+.qa-badge-pro:hover {
+	background: #fbe8cc;
+	color: #a5650a;
+}
+
+/* Tabs */
+.qa-nav {
+	display: flex;
+	gap: 4px;
+	flex-wrap: wrap;
+	background: var(--qa-card);
+	border: 1px solid var(--qa-border);
+	border-radius: var(--qa-radius);
+	padding: 6px;
+	margin-bottom: 20px;
+}
+
+.qa-nav a {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 8px 14px;
+	border-radius: 6px;
+	font-size: 13px;
+	font-weight: 500;
+	text-decoration: none;
+	color: var(--qa-muted);
+}
+
+.qa-nav a:hover {
+	background: var(--qa-bg);
+	color: var(--qa-text);
+}
+
+.qa-nav a.is-active {
+	background: var(--qa-brand);
+	color: #fff;
+}
+
+/* Cards */
+.qa-card {
+	background: var(--qa-card);
+	border: 1px solid var(--qa-border);
+	border-radius: var(--qa-radius);
+	padding: 20px 24px;
+	margin-bottom: 16px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.qa-card h2 {
+	margin: 0 0 4px;
+	font-size: 15px;
+	font-weight: 600;
+}
+
+.qa-card-subtitle {
+	margin: 0 0 16px;
+	font-size: 13px;
+	color: var(--qa-muted);
+}
+
+.qa-section-title {
+	font-size: 13px;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.03em;
+	color: var(--qa-muted);
+	margin: 0 0 12px;
+}
+
+/* Grid of summary / status tiles */
+.qa-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	gap: 16px;
+	margin-bottom: 16px;
+}
+
+.qa-tile {
+	background: var(--qa-card);
+	border: 1px solid var(--qa-border);
+	border-radius: var(--qa-radius);
+	padding: 18px 20px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.qa-tile-label {
+	font-size: 12px;
+	color: var(--qa-muted);
+	margin: 0 0 6px;
+	text-transform: uppercase;
+	letter-spacing: 0.03em;
+}
+
+.qa-tile-value {
+	font-size: 20px;
+	font-weight: 600;
+	margin: 0;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.qa-dot {
+	width: 9px;
+	height: 9px;
+	border-radius: 50%;
+	background: var(--qa-success);
+	display: inline-block;
+	flex-shrink: 0;
+}
+
+/* CTAs */
+.qa-cta-row {
+	display: flex;
+	gap: 12px;
+	flex-wrap: wrap;
+	margin-top: 4px;
+}
+
+.qa-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 10px 18px;
+	border-radius: 6px;
+	font-size: 13px;
+	font-weight: 600;
+	text-decoration: none;
+	border: 1px solid transparent;
+}
+
+.qa-btn-primary {
+	background: var(--qa-brand);
+	color: #fff;
+}
+
+.qa-btn-primary:hover {
+	background: var(--qa-brand-dark);
+	color: #fff;
+}
+
+.qa-btn-secondary {
+	background: var(--qa-card);
+	border-color: var(--qa-border);
+	color: var(--qa-text);
+}
+
+.qa-btn-secondary:hover {
+	background: var(--qa-bg);
+	color: var(--qa-text);
+}
+
+/* Settings form polish (existing fields untouched, wrapper styling only) */
+.qa-wrap .qa-card table.form-table {
+	margin: 0;
+}
+
+.qa-wrap .qa-card > h2:first-child,
+.qa-wrap .qa-card > p:first-child {
+	margin-top: 0;
+}
+
+.qa-wrap details {
+	border: 1px solid var(--qa-border);
+	border-radius: 6px;
+	padding: 10px 14px;
+	margin-bottom: 8px;
+	background: var(--qa-bg);
+}
+
+.qa-wrap details summary {
+	cursor: pointer;
+	font-weight: 600;
+}
+
+.qa-wrap details[open] {
+	background: var(--qa-card);
+}
+
+/* Pro feature cards */
+.qa-pro-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	gap: 16px;
+}
+
+.qa-pro-card {
+	position: relative;
+	background: var(--qa-card);
+	border: 1px solid var(--qa-border);
+	border-radius: var(--qa-radius);
+	padding: 20px;
+	overflow: hidden;
+}
+
+.qa-pro-card-icon {
+	width: 36px;
+	height: 36px;
+	border-radius: 8px;
+	background: var(--qa-bg);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 12px;
+	color: var(--qa-brand);
+}
+
+.qa-pro-card h3 {
+	margin: 0 0 6px;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.qa-pro-card p {
+	margin: 0;
+	font-size: 13px;
+	color: var(--qa-muted);
+}
+
+.qa-pro-lock {
+	position: absolute;
+	top: 16px;
+	right: 16px;
+	color: var(--qa-muted);
+}
+
+.qa-pro-soon {
+	display: inline-block;
+	margin-top: 12px;
+	font-size: 11px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	color: #a5650a;
+	background: #fdf2e3;
+	border-radius: 999px;
+	padding: 3px 10px;
+}
+
+/* Footer */
+.qa-footer {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: 8px;
+	padding: 16px 4px 4px;
+	font-size: 12px;
+	color: var(--qa-muted);
+}
+
+.qa-footer a {
+	color: var(--qa-muted);
+	text-decoration: underline;
+}
+
+@media (max-width: 782px) {
+	.qa-wrap {
+		margin-right: 10px;
+	}
+
+	.qa-header {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+}

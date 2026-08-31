@@ -1,0 +1,45 @@
+# --- OS / editor cruft ---
+.DS_Store
+Thumbs.db
+Desktop.ini
+*~
+*.swp
+*.swo
+
+# --- IDE / tooling ---
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+.phpunit.result.cache
+.php-cs-fixer.cache
+.phpcs.cache
+
+# --- Dependency managers ---
+# NOTE: /vendor is intentionally committed. The plugin bootstrap
+# (adsense-revguard.php) hard-requires vendor/autoload.php at runtime, and this
+# build ships only the generated Composer autoloader (no third-party packages).
+# Do not add /vendor here.
+node_modules/
+composer.phar
+
+# --- Build / packaging artifacts ---
+/build/
+/dist/
+*.zip
+*.tar
+*.tar.gz
+
+# --- Test / coverage output ---
+/coverage/
+/.phpunit.cache/
+clover.xml
+coverage.xml
+junit.xml
+
+# --- Logs / temp ---
+*.log
+*.tmp
+*.bak
+.env
+.env.*
