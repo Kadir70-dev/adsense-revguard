@@ -2,7 +2,7 @@
 Contributors: your-wordpress-org-username
 Tags: adsense, advertising, ads, monetization
 Requires at least: 6.0
-Tested up to: 6.7
+Tested up to: 7.1
 Stable tag: 3.0.0
 Requires PHP: 8.2
 License: GPLv2 or later
@@ -98,4 +98,4 @@ WordPress plugin.
 
 The original placement-engine behaviour and the legacy option keys, content
 control tokens, and widget identifiers are retained so existing Quick Adsense
-installations upgrade cleanly. See LICENSE.md and CREDITS.md for full details.
+installations upgrade cleanly. See LICENSE.md for full derivative-work detail.

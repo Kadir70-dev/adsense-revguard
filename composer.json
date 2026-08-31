@@ -1,0 +1,30 @@
+{
+    "name": "revguard-for-adsense/revguard-for-adsense",
+    "description": "WordPress ad-management plugin: insert Google AdSense or any ad code at configurable positions, with backward compatibility for legacy Quick Adsense installations.",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "keywords": ["wordpress", "wordpress-plugin", "adsense", "advertising", "ads"],
+    "homepage": "https://github.com/Kadir70-dev/adsense-revguard",
+    "authors": [
+        {
+            "name": "Abdul Kadir",
+            "role": "Maintainer"
+        }
+    ],
+    "require": {
+        "php": ">=8.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "QuickAdsense\\": "src/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
+    "scripts": {
+        "test": "docker run --rm -v \"$PWD:/app\" -w /app php:8.2-cli php tests/run.php",
+        "build": "bash build/make-release.sh"
+    }
+}

@@ -66,7 +66,8 @@ done
 echo "    ok: required runtime members present"
 
 for banned in "${SLUG}/tests/" "${SLUG}/.git" "${SLUG}/build/" "${SLUG}/.gitignore" \
-              "${SLUG}/.gitattributes" "${SLUG}/README.md" "${SLUG}/dist/" "${SLUG}/node_modules/"; do
+              "${SLUG}/.gitattributes" "${SLUG}/README.md" "${SLUG}/CREDITS.md" \
+              "${SLUG}/dist/" "${SLUG}/node_modules/"; do
 	if printf '%s\n' "$MEMBERS" | grep -qE "^${banned}"; then
 		echo "FAIL: development artifact leaked into ZIP: $banned"
 		exit 1

@@ -61,16 +61,17 @@ final class KsesAdPolicy implements HtmlPolicyInterface {
 			return array_values( array_unique( array_merge( $props, self::EXTRA_SAFE_STYLE_CSS ) ) );
 		};
 
-		add_filter( 'safe_style_css', $add_ad_style_props );
-
 		$scripts = array();
-		$marker  = 'RGFA-SCRIPT-' . ( function_exists( 'wp_generate_password' ) ? wp_generate_password( 16, false ) : (string) mt_rand() ) . '-';
+		$marker  = 'RGFA-SCRIPT-' . ( function_exists( 'wp_generate_password' ) ? wp_generate_password( 16, false ) : (string) wp_rand() ) . '-';
 
+		// Lift out genuinely inline <script> initialisers (a body, no src) whose
+		// opening tag has no event handler or nested tag; wp_kses() still filters
+		// everything else, including external <script src> loaders.
 		$prepared = (string) preg_replace_callback(
 			'#<script\b([^>]*)>(.*?)</script\s*>#is',
 			function ( array $matches ) use ( &$scripts, $marker ): string {
-				if ( ! $this->scriptOpenTagIsTrusted( $matches[1] ) ) {
-					return '';
+				if ( '' === trim( $matches[2] ) || ! $this->scriptOpenTagIsTrusted( $matches[1] ) ) {
+					return $matches[0];
 				}
 
 				$token             = '<!--' . $marker . count( $scripts ) . '-->';
@@ -81,18 +82,27 @@ final class KsesAdPolicy implements HtmlPolicyInterface {
 			$html
 		);
 
-		$filtered = wp_kses( $prepared, $this->allowed() );
+		add_filter( 'safe_style_css', $add_ad_style_props );
 
-		remove_filter( 'safe_style_css', $add_ad_style_props );
+		try {
+			$filtered = wp_kses( $prepared, $this->allowed() );
+		} finally {
+			remove_filter( 'safe_style_css', $add_ad_style_props );
+		}
 
 		return array() === $scripts ? $filtered : strtr( $filtered, $scripts );
 	}
 
 	/**
-	 * Whether an inline <script> opening tag's attributes are safe to pass
-	 * through untouched: no inline event handler, no nested tag start.
+	 * Whether an inline <script> opening tag is safe to pass through untouched:
+	 * no inline event handler, no nested tag start, and no `src` (external
+	 * loaders stay in the stream so wp_kses() vets their URL).
 	 */
 	private function scriptOpenTagIsTrusted( string $attributes ): bool {
+		if ( 1 === preg_match( '/\bsrc\s*=/i', $attributes ) ) {
+			return false;
+		}
+
 		return 1 !== preg_match( '/\bon[a-z]+\s*=|</i', $attributes );
 	}
 

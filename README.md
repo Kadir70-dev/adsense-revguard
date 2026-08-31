@@ -28,14 +28,11 @@ without requiring theme edits.
 |-------------------|---------|
 | WordPress         | 6.0+    |
 | PHP               | 8.2+    |
-| Tested up to (WP) | 6.7     |
+| Tested up to (WP) | 7.1     |
 
-The plugin ships with a generated Composer PSR-4 autoloader in `vendor/`. No
-third-party runtime packages are bundled.
-
-> **Note:** `Tested up to` reflects the newest WordPress release this rebuild has
-> actually been exercised against. Bump it (in `readme.txt` and here) after
-> verifying on the current WordPress release.
+The plugin ships with a generated Composer PSR-4 autoloader in `vendor/`
+(`composer.json` is included so it can be regenerated). No third-party runtime
+packages are bundled.
 
 ## Installation
 
@@ -58,13 +55,15 @@ work. Back up your site and database before upgrading.
 revguard-for-adsense.php   Plugin bootstrap (environment guard + autoloader + composition root)
 uninstall.php              Uninstall cleanup entry point
 readme.txt                 WordPress.org-format readme
+composer.json              Autoloader manifest (shipped; no runtime dependencies)
 LICENSE.md                 Full licensing and derivative-work attribution
-CREDITS.md                 Credits and attribution detail
 CHANGELOG.md               Release notes
 assets/                    Admin CSS
 src/                       Namespaced plugin source (PSR-4)
 views/                     Admin page templates
 vendor/                    Generated Composer autoloader (committed; required at runtime)
+
+CREDITS.md, README.md, tests/, build/   Repo-only — excluded from the release ZIP
 ```
 
 ## Licensing and attribution

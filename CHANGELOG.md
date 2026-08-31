@@ -23,4 +23,4 @@ an ads.txt UI, or release-channel integrations.
 
 Version 3.0.0 is the first release of the rebuilt codebase. It continues the
 GPL-licensed "Quick Adsense" plugin (original author: namithjawahar; last
-original release 2.8.7, 2022). See LICENSE.md and CREDITS.md for attribution.
+original release 2.8.7, 2022). See LICENSE.md for attribution.

@@ -12,7 +12,9 @@
 /.gitignore       export-ignore
 /.github          export-ignore
 /.editorconfig    export-ignore
+# composer.json IS shipped: Plugin Check flags a bundled /vendor without it.
 /README.md        export-ignore
+/CREDITS.md       export-ignore
 /tests            export-ignore
 /build            export-ignore
 /dist             export-ignore

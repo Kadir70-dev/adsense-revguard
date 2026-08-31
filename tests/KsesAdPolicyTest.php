@@ -65,8 +65,12 @@ function test_med7(): void {
     t_not_contains('javascript:', $evil_proto, 'javascript: protocol stripped from href/src');
 
     $evil_script_attr = $policy->filter('<script src="//ok.example/a.js" onload="evil()"></script>');
-    t_not_contains('onload', $evil_script_attr, 'script tag carrying onload= is dropped entirely');
-    t_not_contains('evil()', $evil_script_attr, 'script tag carrying onload= leaves no residue');
+    t_not_contains('onload', $evil_script_attr, 'external <script> onload= handler stripped by wp_kses');
+    t_not_contains('evil()', $evil_script_attr, 'external <script> onload= leaves no residue');
+    t_contains('src="//ok.example/a.js"', $evil_script_attr, 'external <script src> loader itself is kept');
+
+    $data_src = $policy->filter('<script src="data:text/javascript,alert(1)"></script>');
+    t_not_contains('data:text/javascript', $data_src, 'external <script src="data:..."> URI is stripped (not bypassed)');
 
     $nested = $policy->filter('<script><img src=x onerror=alert(1)></script>');
     // The <script> body is preserved verbatim (admin-trusted); but it is inert
