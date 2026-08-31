@@ -17,14 +17,14 @@ Desktop.ini
 
 # --- Dependency managers ---
 # NOTE: /vendor is intentionally committed. The plugin bootstrap
-# (adsense-revguard.php) hard-requires vendor/autoload.php at runtime, and this
-# build ships only the generated Composer autoloader (no third-party packages).
-# Do not add /vendor here.
+# (revguard-for-adsense.php) hard-requires vendor/autoload.php at runtime, and
+# this build ships only the generated Composer autoloader (no third-party
+# packages). Do not add /vendor here.
 node_modules/
 composer.phar
 
 # --- Build / packaging artifacts ---
-/build/
+# /build/ holds the release script and IS tracked; only its output is ignored.
 /dist/
 *.zip
 *.tar
