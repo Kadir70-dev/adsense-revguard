@@ -1,5 +1,5 @@
 === RevGuard for AdSense ===
-Contributors: your-wordpress-org-username
+Contributors: abdulkadirco
 Tags: adsense, advertising, ads, monetization
 Requires at least: 6.0
 Tested up to: 7.1
@@ -51,6 +51,10 @@ Yes. Version 3.0.0 preserves the legacy settings option and migrates supported o
 
 Yes. Administrators commonly need to store scripts, iframes, and verification markup. Code remains raw at rest and is filtered through the plugin's advertising HTML policy when rendered.
 
+= Does the plugin send any data to Google or other third parties? =
+
+No. RevGuard for AdSense itself makes no external network requests: it has no telemetry, no analytics, no license checks, and no remote API calls. However, the advertising and embed code that an administrator enters is output on the site, and that administrator-selected code may load third-party resources or services (for example Google AdSense). The site owner remains responsible for the code and services they configure and for meeting any applicable privacy or consent obligations.
+
 = Which content tokens are supported? =
 
 Existing tokens including `NoAds`, `OffDef`, `Ads1` through `Ads10`, `RndAds`, and the established position-disable aliases remain supported.
@@ -59,9 +63,9 @@ Existing tokens including `NoAds`, `OffDef`, `Ads1` through `Ads10`, `RndAds`, a
 
 No. Deactivation preserves settings. Choosing Delete from the WordPress Plugins screen runs the uninstall cleanup, which removes only data owned by this plugin. Shared and original-plugin option keys are preserved when the original "Quick Adsense" plugin is detected or when data ownership is ambiguous.
 
-= Does this release include Gutenberg blocks or Pro features? =
+= Does this release include Gutenberg blocks, widgets, or an ads.txt manager? =
 
-No. This release is limited to the compatibility-focused core, settings interface, and approved frontend output.
+No. This release is limited to the compatibility-focused core, the settings interface, and the approved frontend output.
 
 == Upgrade Notice ==
 
@@ -75,7 +79,7 @@ Major compatibility-focused rebuild requiring PHP 8.2 and WordPress 6.0. Back up
 
 * Rebuilt the plugin on PHP 8.2 with Composer PSR-4 autoloading.
 * Added guarded activation, deactivation, uninstall, and versioned migrations.
-* Ported the legacy content-placement engine with golden-master parity coverage.
+* Ported the legacy content-placement engine while preserving placement and control-token behavior.
 * Added a modern settings page using preserved option keys.
 * Added nonce, capability, sanitization, escaping, and output-policy controls.
 * Added header and footer embed-code integration.
