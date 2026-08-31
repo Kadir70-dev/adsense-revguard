@@ -10,8 +10,14 @@ This software is distributed in the hope that it will be useful, but WITHOUT
 ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-The complete license text is available at:
+The complete, verbatim text of the GNU General Public License, version 2, is
+included in this distribution as `license.txt`, and is also available at:
 https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+
+`license.txt` contains the GPL version 2 text as the reference license; this
+plugin is licensed as `GPL-2.0-or-later` ("version 2 or, at your option, any
+later version"), as stated in the plugin header, `readme.txt`, and
+`composer.json`.
 
 ## Copyright
 

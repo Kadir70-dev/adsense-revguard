@@ -60,7 +60,7 @@ printf '%s\n' "$MEMBERS" | grep -qxE "${SLUG}/${SLUG}\.php" \
 echo "    ok: ${SLUG}/${SLUG}.php present directly under the root"
 
 for must in "${SLUG}/uninstall.php" "${SLUG}/readme.txt" "${SLUG}/LICENSE.md" \
-            "${SLUG}/vendor/autoload.php" "${SLUG}/src/Plugin.php"; do
+            "${SLUG}/license.txt" "${SLUG}/vendor/autoload.php" "${SLUG}/src/Plugin.php"; do
 	printf '%s\n' "$MEMBERS" | grep -qxE "$must" || { echo "FAIL: missing required member: $must"; exit 1; }
 done
 echo "    ok: required runtime members present"
