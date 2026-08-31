@@ -19,11 +19,9 @@ use QuickAdsense\Provider\FrontendProvider;
 /**
  * The plugin's composition root and singleton entry point.
  *
- * Task-001 scaffold: constructs the service container and exposes the boot
- * lifecycle. Service providers, migrations, settings, and the ad-insertion
- * engine are registered here in subsequent tasks per ARCHITECTURE_V2.md
- * (§6.1 bootstrap sequence). No runtime behaviour is registered yet, so
- * activating this scaffold changes nothing observable on the site.
+ * Constructs the service container and drives the boot lifecycle: the core,
+ * admin, and frontend service providers register their factories, then each is
+ * booted so its WordPress hooks are wired.
  */
 final class Plugin {
 
@@ -150,9 +148,6 @@ final class Plugin {
 
 	/**
 	 * The plugin's service providers, in registration order.
-	 *
-	 * Additional bounded-context providers (Admin, Frontend, Stats, AdsTxt,
-	 * Widgets, Editor) are added here in later phases per ARCHITECTURE_V2.md §2.
 	 *
 	 * @return array<int, ServiceProviderInterface>
 	 */

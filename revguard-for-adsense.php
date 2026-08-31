@@ -12,11 +12,10 @@
  *
  * @package QuickAdsense
  *
- * RevGuard for AdSense 3.0 — full rebuild. Architecture is frozen in
- * ../ARCHITECTURE_V2.md. This bootstrap file is intentionally thin: it guards
- * the runtime environment, loads the Composer autoloader, defines the plugin
- * constants, and hands control to the composition root (QuickAdsense\Plugin).
- * No business logic lives here.
+ * RevGuard for AdSense 3.0 — full rebuild. This bootstrap file is intentionally
+ * thin: it guards the runtime environment, loads the Composer autoloader,
+ * defines the plugin constants, and hands control to the composition root
+ * (QuickAdsense\Plugin). No business logic lives here.
  */
 
 declare(strict_types=1);
@@ -91,7 +90,7 @@ if ( ! is_readable( $revguard_for_adsense_autoload ) ) {
 			printf(
 				'<div class="notice notice-error"><p>%s</p></div>',
 				esc_html__(
-					'RevGuard for AdSense could not start because its dependencies are missing. Run "composer install" inside the plugin directory.',
+					'RevGuard for AdSense could not start because some of its files are missing. The installation looks incomplete or corrupted — please delete the plugin and install it again from a fresh copy.',
 					'revguard-for-adsense'
 				)
 			);

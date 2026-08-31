@@ -13,7 +13,7 @@ namespace QuickAdsense\Contracts;
  * Read-only view of the current WordPress request that the ad engine needs.
  *
  * Keeping every WordPress conditional/global behind this interface is what makes
- * the engine a pure, testable domain component (ARCHITECTURE_V2.md §3).
+ * the engine a pure, testable domain component.
  */
 interface RequestContextInterface {
 

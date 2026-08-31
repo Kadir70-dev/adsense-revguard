@@ -14,8 +14,8 @@ namespace QuickAdsense\Settings;
  * is persisted. Unlike the legacy passthrough sanitiser, this enforces types.
  *
  * Ad-code fields are preserved verbatim (raw HTML/JS is required for ad and
- * tracker snippets); output-time escaping is the responsibility of the render
- * layer via the scoped KsesAdPolicy, per ARCHITECTURE_V2.md §6.4.
+ * tracker snippets); output-time filtering is the responsibility of the render
+ * layer via the scoped KsesAdPolicy.
  */
 final class SettingsSanitizer {
 

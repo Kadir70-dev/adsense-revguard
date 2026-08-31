@@ -15,8 +15,8 @@ use QuickAdsense\Support\ContainerException;
 /**
  * A small, dependency-free, PSR-11-style service container.
  *
- * Deliberately minimal (no autowiring, no framework) per ARCHITECTURE_V2.md §2.
- * Providers bind factories during registration; services are resolved lazily.
+ * Deliberately minimal: no autowiring and no framework. Providers bind factories
+ * during registration; services are resolved lazily.
  */
 final class Container {
 

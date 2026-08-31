@@ -58,7 +58,7 @@ $qa_plugin_ver  = defined( 'REVGUARD_FOR_ADSENSE_VERSION' ) ? REVGUARD_FOR_ADSEN
 		<div class="qa-grid">
 			<div class="qa-tile">
 				<p class="qa-tile-label"><?php echo esc_html__( 'Ad slots available', 'revguard-for-adsense' ); ?></p>
-				<p class="qa-tile-value"><?php echo esc_html__( '10', 'revguard-for-adsense' ); ?></p>
+				<p class="qa-tile-value"><?php echo esc_html( (string) 10 ); ?></p>
 			</div>
 			<div class="qa-tile">
 				<p class="qa-tile-label"><?php echo esc_html__( 'Placement rules', 'revguard-for-adsense' ); ?></p>
