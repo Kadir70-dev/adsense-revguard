@@ -4,7 +4,6 @@
     "type": "wordpress-plugin",
     "license": "GPL-2.0-or-later",
     "keywords": ["wordpress", "wordpress-plugin", "adsense", "advertising", "ads"],
-    "homepage": "https://github.com/Kadir70-dev/adsense-revguard",
     "authors": [
         {
             "name": "Abdul Kadir",
