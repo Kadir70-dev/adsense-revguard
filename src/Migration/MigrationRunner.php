@@ -30,6 +30,19 @@ final class MigrationRunner {
 	public const BACKUP_OPTION = 'quick_adsense_migration_backup';
 
 	/**
+	 * Ownership marker written once this plugin has successfully migrated or
+	 * seeded the shared `quick_adsense_settings` option.
+	 *
+	 * This is a brand-new, plugin-namespaced key that neither the original
+	 * "Quick Adsense" plugin nor its "Reloaded" fork ever read or write. Its
+	 * presence tells the uninstaller that this plugin — not a separately
+	 * installed original — is the party responsible for the settings array, so
+	 * it is safe to remove on delete. The stored value is the schema version
+	 * that was reached, for diagnostics only.
+	 */
+	public const OWNER_OPTION = 'revguard_for_adsense_data_owner';
+
+	/**
 	 * Legacy option keys snapshotted before migration, enabling rollback.
 	 *
 	 * @var array<int, string>
@@ -89,6 +102,7 @@ final class MigrationRunner {
 			}
 
 			$this->options->update( SchemaVersion::OPTION, $this->target_version );
+			$this->options->update( self::OWNER_OPTION, $this->target_version );
 		} catch ( Throwable $error ) {
 			$this->last_error = $error;
 			$this->rollback();
@@ -128,6 +142,7 @@ final class MigrationRunner {
 
 		$this->options->delete( self::BACKUP_OPTION );
 		$this->options->delete( SchemaVersion::OPTION );
+		$this->options->delete( self::OWNER_OPTION );
 	}
 
 	/**
