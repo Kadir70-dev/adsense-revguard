@@ -103,18 +103,6 @@
 	color: var(--qa-success);
 }
 
-.qa-badge-pro {
-	background: #fdf2e3;
-	color: #a5650a;
-	text-decoration: none;
-	border: 1px solid #f3dcb4;
-}
-
-.qa-badge-pro:hover {
-	background: #fbe8cc;
-	color: #a5650a;
-}
-
 /* Tabs */
 .qa-nav {
 	display: flex;
@@ -252,17 +240,6 @@
 	color: #fff;
 }
 
-.qa-btn-secondary {
-	background: var(--qa-card);
-	border-color: var(--qa-border);
-	color: var(--qa-text);
-}
-
-.qa-btn-secondary:hover {
-	background: var(--qa-bg);
-	color: var(--qa-text);
-}
-
 /* Settings form polish (existing fields untouched, wrapper styling only) */
 .qa-wrap .qa-card table.form-table {
 	margin: 0;
@@ -288,66 +265,6 @@
 
 .qa-wrap details[open] {
 	background: var(--qa-card);
-}
-
-/* Pro feature cards */
-.qa-pro-grid {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-	gap: 16px;
-}
-
-.qa-pro-card {
-	position: relative;
-	background: var(--qa-card);
-	border: 1px solid var(--qa-border);
-	border-radius: var(--qa-radius);
-	padding: 20px;
-	overflow: hidden;
-}
-
-.qa-pro-card-icon {
-	width: 36px;
-	height: 36px;
-	border-radius: 8px;
-	background: var(--qa-bg);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	margin-bottom: 12px;
-	color: var(--qa-brand);
-}
-
-.qa-pro-card h3 {
-	margin: 0 0 6px;
-	font-size: 14px;
-	font-weight: 600;
-}
-
-.qa-pro-card p {
-	margin: 0;
-	font-size: 13px;
-	color: var(--qa-muted);
-}
-
-.qa-pro-lock {
-	position: absolute;
-	top: 16px;
-	right: 16px;
-	color: var(--qa-muted);
-}
-
-.qa-pro-soon {
-	display: inline-block;
-	margin-top: 12px;
-	font-size: 11px;
-	font-weight: 700;
-	text-transform: uppercase;
-	letter-spacing: 0.04em;
-	color: #a5650a;
-	background: #fdf2e3;
-	border-radius: 999px;
-	padding: 3px 10px;
 }
 
 /* Footer */

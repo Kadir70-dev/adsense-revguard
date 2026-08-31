@@ -80,7 +80,6 @@ final class SettingsPage {
 			'home'     => 'admin/home-page',
 			'settings' => 'admin/settings-page',
 			'about'    => 'admin/about-page',
-			'pro'      => 'admin/pro-page',
 		);
 	}
 

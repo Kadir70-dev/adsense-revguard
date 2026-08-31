@@ -47,9 +47,6 @@ $qa_plugin_ver  = defined( 'REVGUARD_FOR_ADSENSE_VERSION' ) ? REVGUARD_FOR_ADSEN
 			<a class="qa-btn qa-btn-primary" href="<?php echo esc_url( add_query_arg( 'tab', 'settings', admin_url( 'admin.php?page=revguard-for-adsense' ) ) ); ?>">
 				<?php echo esc_html__( 'Configure Ads', 'revguard-for-adsense' ); ?>
 			</a>
-			<a class="qa-btn qa-btn-secondary" href="<?php echo esc_url( add_query_arg( 'tab', 'pro', admin_url( 'admin.php?page=revguard-for-adsense' ) ) ); ?>">
-				<?php echo esc_html__( 'View Pro Features', 'revguard-for-adsense' ); ?>
-			</a>
 		</div>
 	</div>
 

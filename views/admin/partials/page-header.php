@@ -15,7 +15,6 @@ $qa_tabs = array(
 	'home'     => __( 'Home', 'revguard-for-adsense' ),
 	'settings' => __( 'Ad Settings', 'revguard-for-adsense' ),
 	'about'    => __( 'About', 'revguard-for-adsense' ),
-	'pro'      => __( 'Upcoming Pro', 'revguard-for-adsense' ),
 );
 ?>
 <div class="qa-header">
@@ -41,9 +40,6 @@ $qa_tabs = array(
 			?>
 		</span>
 		<span class="qa-badge qa-badge-free"><?php echo esc_html__( 'Free', 'revguard-for-adsense' ); ?></span>
-		<a class="qa-badge qa-badge-pro" href="<?php echo esc_url( add_query_arg( 'tab', 'pro' ) ); ?>">
-			<?php echo esc_html__( 'Pro Coming Soon', 'revguard-for-adsense' ); ?>
-		</a>
 	</div>
 </div>
 
