@@ -1,12 +1,12 @@
-# AdSense RevGuard
+# RevGuard for AdSense
 
-AdSense RevGuard is a WordPress ad-management plugin that inserts Google AdSense
+RevGuard for AdSense is a WordPress ad-management plugin that inserts Google AdSense
 or any arbitrary ad markup into your site's content at configurable positions,
 without requiring theme edits.
 
 - **Current version:** 3.0.0
 - **License:** GPL-2.0-or-later
-- **Text domain:** `adsense-revguard`
+- **Text domain:** `revguard-for-adsense`
 
 ## Features
 
@@ -36,9 +36,9 @@ third-party runtime packages are bundled.
 ## Installation
 
 1. Download or clone this repository into
-   `wp-content/plugins/adsense-revguard/`.
-2. Activate **AdSense RevGuard** from the WordPress Plugins screen.
-3. Open **AdSense RevGuard** in the admin menu and configure ad slots,
+   `wp-content/plugins/revguard-for-adsense/`.
+2. Activate **RevGuard for AdSense** from the WordPress Plugins screen.
+3. Open **RevGuard for AdSense** in the admin menu and configure ad slots,
    positions, and display conditions.
 
 ## Upgrading from Quick Adsense 2.8.7
@@ -51,7 +51,7 @@ work. Back up your site and database before upgrading.
 ## Repository layout
 
 ```
-adsense-revguard.php      Plugin bootstrap (environment guard + autoloader + composition root)
+revguard-for-adsense.php      Plugin bootstrap (environment guard + autoloader + composition root)
 uninstall.php             Uninstall cleanup entry point
 readme.txt                WordPress.org-format readme
 LICENSE.md                Licensing summary and legacy attribution
@@ -64,7 +64,7 @@ vendor/                   Generated Composer autoloader (committed; required at 
 
 ## Licensing and attribution
 
-AdSense RevGuard is free software distributed under the GNU General Public
+RevGuard for AdSense is free software distributed under the GNU General Public
 License, version 2 or (at your option) any later version. See
 [`LICENSE.md`](LICENSE.md) and <https://www.gnu.org/licenses/gpl-2.0.html>.
 

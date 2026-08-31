@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:       AdSense RevGuard
+ * Plugin Name:       RevGuard for AdSense
  * Description:       A quick, flexible way to insert Google AdSense or any ad code into your WordPress site.
  * Version:           3.0.0
  * Requires at least: 6.0
@@ -8,11 +8,11 @@
  * Author:            Abdul Kadir
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       adsense-revguard
+ * Text Domain:       revguard-for-adsense
  *
  * @package QuickAdsense
  *
- * AdSense RevGuard 3.0 — full rebuild. Architecture is frozen in
+ * RevGuard for AdSense 3.0 — full rebuild. Architecture is frozen in
  * ../ARCHITECTURE_V2.md. This bootstrap file is intentionally thin: it guards
  * the runtime environment, loads the Composer autoloader, defines the plugin
  * constants, and hands control to the composition root (QuickAdsense\Plugin).
@@ -27,15 +27,15 @@ defined( 'ABSPATH' ) || exit;
  * Hard requirements. Kept as bare constants so the environment guard below can
  * run before the autoloader (and therefore before any class) is available.
  */
-const ADSENSE_REVGUARD_MIN_PHP = '8.2';
-const ADSENSE_REVGUARD_MIN_WP  = '6.0';
+const REVGUARD_FOR_ADSENSE_MIN_PHP = '8.2';
+const REVGUARD_FOR_ADSENSE_MIN_WP  = '6.0';
 
 /*
  * --------------------------------------------------------------------------
  * 1. Environment guard — degrade gracefully, never fatal.
  * --------------------------------------------------------------------------
  */
-if ( version_compare( PHP_VERSION, ADSENSE_REVGUARD_MIN_PHP, '<' ) ) {
+if ( version_compare( PHP_VERSION, REVGUARD_FOR_ADSENSE_MIN_PHP, '<' ) ) {
 	add_action(
 		'admin_notices',
 		static function (): void {
@@ -44,8 +44,8 @@ if ( version_compare( PHP_VERSION, ADSENSE_REVGUARD_MIN_PHP, '<' ) ) {
 				esc_html(
 					sprintf(
 						/* translators: 1: required PHP version, 2: current PHP version. */
-						__( 'AdSense RevGuard requires PHP %1$s or higher. Your server is running PHP %2$s. Please upgrade PHP to activate the plugin.', 'adsense-revguard' ),
-						ADSENSE_REVGUARD_MIN_PHP,
+						__( 'RevGuard for AdSense requires PHP %1$s or higher. Your server is running PHP %2$s. Please upgrade PHP to activate the plugin.', 'revguard-for-adsense' ),
+						REVGUARD_FOR_ADSENSE_MIN_PHP,
 						PHP_VERSION
 					)
 				)
@@ -56,7 +56,7 @@ if ( version_compare( PHP_VERSION, ADSENSE_REVGUARD_MIN_PHP, '<' ) ) {
 	return;
 }
 
-if ( version_compare( get_bloginfo( 'version' ), ADSENSE_REVGUARD_MIN_WP, '<' ) ) {
+if ( version_compare( get_bloginfo( 'version' ), REVGUARD_FOR_ADSENSE_MIN_WP, '<' ) ) {
 	add_action(
 		'admin_notices',
 		static function (): void {
@@ -65,8 +65,8 @@ if ( version_compare( get_bloginfo( 'version' ), ADSENSE_REVGUARD_MIN_WP, '<' ) 
 				esc_html(
 					sprintf(
 						/* translators: 1: required WordPress version, 2: current WordPress version. */
-						__( 'AdSense RevGuard requires WordPress %1$s or higher. This site is running WordPress %2$s.', 'adsense-revguard' ),
-						ADSENSE_REVGUARD_MIN_WP,
+						__( 'RevGuard for AdSense requires WordPress %1$s or higher. This site is running WordPress %2$s.', 'revguard-for-adsense' ),
+						REVGUARD_FOR_ADSENSE_MIN_WP,
 						get_bloginfo( 'version' )
 					)
 				)
@@ -82,17 +82,17 @@ if ( version_compare( get_bloginfo( 'version' ), ADSENSE_REVGUARD_MIN_WP, '<' ) 
  * 2. Composer autoloader — required to run; degrade gracefully if absent.
  * --------------------------------------------------------------------------
  */
-$adsense_revguard_autoload = __DIR__ . '/vendor/autoload.php';
+$revguard_for_adsense_autoload = __DIR__ . '/vendor/autoload.php';
 
-if ( ! is_readable( $adsense_revguard_autoload ) ) {
+if ( ! is_readable( $revguard_for_adsense_autoload ) ) {
 	add_action(
 		'admin_notices',
 		static function (): void {
 			printf(
 				'<div class="notice notice-error"><p>%s</p></div>',
 				esc_html__(
-					'AdSense RevGuard could not start because its dependencies are missing. Run "composer install" inside the plugin directory.',
-					'adsense-revguard'
+					'RevGuard for AdSense could not start because its dependencies are missing. Run "composer install" inside the plugin directory.',
+					'revguard-for-adsense'
 				)
 			);
 		}
@@ -101,17 +101,17 @@ if ( ! is_readable( $adsense_revguard_autoload ) ) {
 	return;
 }
 
-require_once $adsense_revguard_autoload;
+require_once $revguard_for_adsense_autoload;
 
 /*
  * --------------------------------------------------------------------------
  * 3. Plugin constants (runtime values that require WordPress functions).
  * --------------------------------------------------------------------------
  */
-define( 'ADSENSE_REVGUARD_VERSION', '3.0.0' );
-define( 'ADSENSE_REVGUARD_FILE', __FILE__ );
-define( 'ADSENSE_REVGUARD_PATH', plugin_dir_path( __FILE__ ) );
-define( 'ADSENSE_REVGUARD_URL', plugin_dir_url( __FILE__ ) );
+define( 'REVGUARD_FOR_ADSENSE_VERSION', '3.0.0' );
+define( 'REVGUARD_FOR_ADSENSE_FILE', __FILE__ );
+define( 'REVGUARD_FOR_ADSENSE_PATH', plugin_dir_path( __FILE__ ) );
+define( 'REVGUARD_FOR_ADSENSE_URL', plugin_dir_url( __FILE__ ) );
 
 /*
  * --------------------------------------------------------------------------
@@ -121,10 +121,10 @@ define( 'ADSENSE_REVGUARD_URL', plugin_dir_url( __FILE__ ) );
  * Plugin::boot() in later tasks. Booting on `plugins_loaded` ensures WordPress
  * core and other plugins are available before we register our hooks.
  */
-$adsense_revguard_plugin = \QuickAdsense\Plugin::instance();
-$adsense_revguard_plugin->registerLifecycleHooks();
+$revguard_for_adsense_plugin = \QuickAdsense\Plugin::instance();
+$revguard_for_adsense_plugin->registerLifecycleHooks();
 
 add_action(
 	'plugins_loaded',
-	array( $adsense_revguard_plugin, 'boot' )
+	array( $revguard_for_adsense_plugin, 'boot' )
 );

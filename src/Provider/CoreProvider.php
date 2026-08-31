@@ -85,7 +85,7 @@ final class CoreProvider implements ServiceProviderInterface {
 		if ( ! $runner->run() ) {
 			$message = $runner->lastError()?->getMessage() ?? 'Unknown migration failure';
 			// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log -- Required lifecycle observability.
-			error_log( 'AdSense RevGuard migration failed and was rolled back: ' . $message );
+			error_log( 'RevGuard for AdSense migration failed and was rolled back: ' . $message );
 		}
 	}
 }

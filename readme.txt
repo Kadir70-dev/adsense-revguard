@@ -1,4 +1,4 @@
-=== AdSense RevGuard ===
+=== RevGuard for AdSense ===
 Contributors: quickadsense
 Tags: adsense, advertising, ads, monetization
 Requires at least: 6.0
@@ -12,7 +12,7 @@ Insert advertising code into WordPress content at configurable positions while p
 
 == Description ==
 
-AdSense RevGuard provides configurable advertising placement without requiring theme edits.
+RevGuard for AdSense provides configurable advertising placement without requiring theme edits.
 
 Version 3.0.0 is a compatibility-focused rebuild. Existing legacy configuration is migrated into the preserved `quick_adsense_settings` option, and existing content control tokens remain supported.
 
@@ -32,9 +32,9 @@ Ad and embed code is stored as entered by an administrator and filtered at each 
 == Installation ==
 
 1. In WordPress, open Plugins > Add New > Upload Plugin.
-2. Select the AdSense RevGuard ZIP file and choose Install Now.
-3. Activate AdSense RevGuard.
-4. Open AdSense RevGuard in the WordPress admin menu.
+2. Select the RevGuard for AdSense ZIP file and choose Install Now.
+3. Activate RevGuard for AdSense.
+4. Open RevGuard for AdSense in the WordPress admin menu.
 5. Configure ad slots, positions, and display conditions, then save.
 
 For upgrades from legacy version 2.8.7, back up the site and database first. Install the new version over the existing plugin. The activation process preserves and migrates supported legacy settings automatically.

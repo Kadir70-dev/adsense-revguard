@@ -1,6 +1,6 @@
 <?php
 /**
- * Composition root for AdSense RevGuard.
+ * Composition root for RevGuard for AdSense.
  *
  * @package QuickAdsense
  */
@@ -77,15 +77,15 @@ final class Plugin {
 	/**
 	 * Retrieve (and lazily create) the shared plugin instance.
 	 *
-	 * Relies on the ADSENSE_REVGUARD_* constants defined in the bootstrap file.
+	 * Relies on the REVGUARD_FOR_ADSENSE_* constants defined in the bootstrap file.
 	 */
 	public static function instance(): self {
 		if ( null === self::$instance ) {
 			self::$instance = new self(
-				version: ADSENSE_REVGUARD_VERSION,
-				file: ADSENSE_REVGUARD_FILE,
-				path: ADSENSE_REVGUARD_PATH,
-				url: ADSENSE_REVGUARD_URL,
+				version: REVGUARD_FOR_ADSENSE_VERSION,
+				file: REVGUARD_FOR_ADSENSE_FILE,
+				path: REVGUARD_FOR_ADSENSE_PATH,
+				url: REVGUARD_FOR_ADSENSE_URL,
 			);
 		}
 

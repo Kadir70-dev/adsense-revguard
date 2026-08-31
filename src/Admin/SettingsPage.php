@@ -18,8 +18,8 @@ use QuickAdsense\Settings\Schema;
 final class SettingsPage {
 
 	public const CAPABILITY   = 'manage_options';
-	public const NONCE_ACTION = 'adsense_revguard_save_settings';
-	public const NONCE_NAME   = 'adsense_revguard_nonce';
+	public const NONCE_ACTION = 'revguard_for_adsense_save_settings';
+	public const NONCE_NAME   = 'revguard_for_adsense_nonce';
 
 	public function __construct(
 		private readonly SettingsRepositoryInterface $settings,
@@ -31,9 +31,9 @@ final class SettingsPage {
 		$notice = '';
 
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only notice selector after an admin-post redirect.
-		if ( isset( $_GET['adsense_revguard_notice'] ) ) {
+		if ( isset( $_GET['revguard_for_adsense_notice'] ) ) {
 			// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only notice selector after an admin-post redirect.
-			$notice = sanitize_key( wp_unslash( $_GET['adsense_revguard_notice'] ) );
+			$notice = sanitize_key( wp_unslash( $_GET['revguard_for_adsense_notice'] ) );
 		}
 
 		$tab = $this->currentTab();
@@ -92,16 +92,16 @@ final class SettingsPage {
 	public function save( array $input, string $nonce ): bool {
 		if ( ! current_user_can( self::CAPABILITY ) ) {
 			wp_die(
-				esc_html__( 'You are not allowed to manage AdSense RevGuard settings.', 'adsense-revguard' ),
-				esc_html__( 'AdSense RevGuard', 'adsense-revguard' ),
+				esc_html__( 'You are not allowed to manage RevGuard for AdSense settings.', 'revguard-for-adsense' ),
+				esc_html__( 'RevGuard for AdSense', 'revguard-for-adsense' ),
 				array( 'response' => 403 )
 			);
 		}
 
 		if ( ! wp_verify_nonce( $nonce, self::NONCE_ACTION ) ) {
 			wp_die(
-				esc_html__( 'The settings request could not be verified. Please try again.', 'adsense-revguard' ),
-				esc_html__( 'AdSense RevGuard', 'adsense-revguard' ),
+				esc_html__( 'The settings request could not be verified. Please try again.', 'revguard-for-adsense' ),
+				esc_html__( 'RevGuard for AdSense', 'revguard-for-adsense' ),
 				array( 'response' => 403 )
 			);
 		}

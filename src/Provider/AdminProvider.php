@@ -23,7 +23,7 @@ final class AdminProvider implements ServiceProviderInterface {
 	public function register( Container $container ): void {
 		$container->singleton(
 			ViewRendererInterface::class,
-			static fn (): ViewRendererInterface => new PhpViewRenderer( ADSENSE_REVGUARD_PATH . 'views' )
+			static fn (): ViewRendererInterface => new PhpViewRenderer( REVGUARD_FOR_ADSENSE_PATH . 'views' )
 		);
 		$container->singleton( ControlFactory::class, static fn (): ControlFactory => new ControlFactory() );
 		$container->singleton(
@@ -44,7 +44,7 @@ final class AdminProvider implements ServiceProviderInterface {
 		add_action( 'admin_menu', array( $container->get( Menu::class ), 'register' ) );
 		add_action( 'admin_enqueue_scripts', array( self::class, 'enqueueAssets' ) );
 		add_action(
-			'admin_post_adsense_revguard_save_settings',
+			'admin_post_revguard_for_adsense_save_settings',
 			static function () use ( $container ): void {
 				$input = array();
 				$nonce = '';
@@ -60,16 +60,16 @@ final class AdminProvider implements ServiceProviderInterface {
 					return;
 				}
 
-				if ( isset( $_POST['adsense_revguard_settings'] ) && is_array( $_POST['adsense_revguard_settings'] ) ) {
+				if ( isset( $_POST['revguard_for_adsense_settings'] ) && is_array( $_POST['revguard_for_adsense_settings'] ) ) {
 					// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- SettingsSanitizer validates each known field.
-					$input = wp_unslash( $_POST['adsense_revguard_settings'] );
+					$input = wp_unslash( $_POST['revguard_for_adsense_settings'] );
 				}
 
 				$saved = $container->get( SettingsPage::class )->save( $input, $nonce );
 				$url   = add_query_arg(
-					'adsense_revguard_notice',
+					'revguard_for_adsense_notice',
 					$saved ? 'saved' : 'error',
-					admin_url( 'admin.php?page=adsense-revguard&tab=settings' )
+					admin_url( 'admin.php?page=revguard-for-adsense&tab=settings' )
 				);
 
 				wp_safe_redirect( $url );
@@ -79,18 +79,18 @@ final class AdminProvider implements ServiceProviderInterface {
 	}
 
 	/**
-	 * Enqueue the admin UI stylesheet, scoped to the AdSense RevGuard screen only.
+	 * Enqueue the admin UI stylesheet, scoped to the RevGuard for AdSense screen only.
 	 */
 	public static function enqueueAssets( string $hook_suffix ): void {
-		if ( 'toplevel_page_adsense-revguard' !== $hook_suffix ) {
+		if ( 'toplevel_page_revguard-for-adsense' !== $hook_suffix ) {
 			return;
 		}
 
 		wp_enqueue_style(
-			'adsense-revguard-admin',
-			ADSENSE_REVGUARD_URL . 'assets/css/admin.css',
+			'revguard-for-adsense-admin',
+			REVGUARD_FOR_ADSENSE_URL . 'assets/css/admin.css',
 			array(),
-			ADSENSE_REVGUARD_VERSION
+			REVGUARD_FOR_ADSENSE_VERSION
 		);
 	}
 }

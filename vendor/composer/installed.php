@@ -1,6 +1,6 @@
 <?php return array(
     'root' => array(
-        'name' => 'adsense-revguard/adsense-revguard',
+        'name' => 'revguard-for-adsense/revguard-for-adsense',
         'pretty_version' => '1.0.0+no-version-set',
         'version' => '1.0.0.0',
         'reference' => null,
@@ -10,7 +10,7 @@
         'dev' => false,
     ),
     'versions' => array(
-        'adsense-revguard/adsense-revguard' => array(
+        'revguard-for-adsense/revguard-for-adsense' => array(
             'pretty_version' => '1.0.0+no-version-set',
             'version' => '1.0.0.0',
             'reference' => null,

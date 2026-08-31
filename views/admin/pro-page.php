@@ -18,38 +18,38 @@ $tab = (string) $context['tab'];
 $qa_pro_features = array(
 	array(
 		'icon'  => 'dashicons-tag',
-		'title' => __( 'Advanced Targeting', 'adsense-revguard' ),
-		'desc'  => __( 'Target ads by category, tag, author, or custom rule sets.', 'adsense-revguard' ),
+		'title' => __( 'Advanced Targeting', 'revguard-for-adsense' ),
+		'desc'  => __( 'Target ads by category, tag, author, or custom rule sets.', 'revguard-for-adsense' ),
 	),
 	array(
 		'icon'  => 'dashicons-chart-bar',
-		'title' => __( 'Analytics', 'adsense-revguard' ),
-		'desc'  => __( 'See impressions and clicks per ad slot, right in your dashboard.', 'adsense-revguard' ),
+		'title' => __( 'Analytics', 'revguard-for-adsense' ),
+		'desc'  => __( 'See impressions and clicks per ad slot, right in your dashboard.', 'revguard-for-adsense' ),
 	),
 	array(
 		'icon'  => 'dashicons-randomize',
-		'title' => __( 'A/B Testing', 'adsense-revguard' ),
-		'desc'  => __( 'Run multiple ad variants and compare performance automatically.', 'adsense-revguard' ),
+		'title' => __( 'A/B Testing', 'revguard-for-adsense' ),
+		'desc'  => __( 'Run multiple ad variants and compare performance automatically.', 'revguard-for-adsense' ),
 	),
 	array(
 		'icon'  => 'dashicons-clock',
-		'title' => __( 'Scheduling', 'adsense-revguard' ),
-		'desc'  => __( 'Show or hide ads automatically on a date and time schedule.', 'adsense-revguard' ),
+		'title' => __( 'Scheduling', 'revguard-for-adsense' ),
+		'desc'  => __( 'Show or hide ads automatically on a date and time schedule.', 'revguard-for-adsense' ),
 	),
 	array(
 		'icon'  => 'dashicons-smartphone',
-		'title' => __( 'Device Targeting', 'adsense-revguard' ),
-		'desc'  => __( 'Serve different ad code to desktop, tablet, and mobile visitors.', 'adsense-revguard' ),
+		'title' => __( 'Device Targeting', 'revguard-for-adsense' ),
+		'desc'  => __( 'Serve different ad code to desktop, tablet, and mobile visitors.', 'revguard-for-adsense' ),
 	),
 	array(
 		'icon'  => 'dashicons-admin-site-alt3',
-		'title' => __( 'Geo Targeting', 'adsense-revguard' ),
-		'desc'  => __( 'Target ad placements by visitor country or region.', 'adsense-revguard' ),
+		'title' => __( 'Geo Targeting', 'revguard-for-adsense' ),
+		'desc'  => __( 'Target ad placements by visitor country or region.', 'revguard-for-adsense' ),
 	),
 	array(
 		'icon'  => 'dashicons-sos',
-		'title' => __( 'Priority Support', 'adsense-revguard' ),
-		'desc'  => __( 'Faster response times from the AdSense RevGuard support team.', 'adsense-revguard' ),
+		'title' => __( 'Priority Support', 'revguard-for-adsense' ),
+		'desc'  => __( 'Faster response times from the RevGuard for AdSense support team.', 'revguard-for-adsense' ),
 	),
 );
 ?>
@@ -57,9 +57,9 @@ $qa_pro_features = array(
 	<?php require __DIR__ . '/partials/page-header.php'; ?>
 
 	<div class="qa-card">
-		<h2><?php echo esc_html__( 'Upcoming Pro features', 'adsense-revguard' ); ?></h2>
+		<h2><?php echo esc_html__( 'Upcoming Pro features', 'revguard-for-adsense' ); ?></h2>
 		<p class="qa-card-subtitle">
-			<?php echo esc_html__( 'A preview of what is planned for AdSense RevGuard Pro. These features are not yet available and nothing below changes how the free plugin works today.', 'adsense-revguard' ); ?>
+			<?php echo esc_html__( 'A preview of what is planned for RevGuard for AdSense Pro. These features are not yet available and nothing below changes how the free plugin works today.', 'revguard-for-adsense' ); ?>
 		</p>
 	</div>
 
@@ -72,7 +72,7 @@ $qa_pro_features = array(
 				</span>
 				<h3><?php echo esc_html( $qa_feature['title'] ); ?></h3>
 				<p><?php echo esc_html( $qa_feature['desc'] ); ?></p>
-				<span class="qa-pro-soon"><?php echo esc_html__( 'Coming soon', 'adsense-revguard' ); ?></span>
+				<span class="qa-pro-soon"><?php echo esc_html__( 'Coming soon', 'revguard-for-adsense' ); ?></span>
 			</div>
 		<?php endforeach; ?>
 	</div>

@@ -17,10 +17,10 @@ final class Menu {
 
 	public function register(): void {
 		add_menu_page(
-			__( 'AdSense RevGuard', 'adsense-revguard' ),
-			__( 'AdSense RevGuard', 'adsense-revguard' ),
+			__( 'RevGuard for AdSense', 'revguard-for-adsense' ),
+			__( 'RevGuard for AdSense', 'revguard-for-adsense' ),
 			SettingsPage::CAPABILITY,
-			'adsense-revguard',
+			'revguard-for-adsense',
 			array( $this->page, 'render' ),
 			'dashicons-money-alt'
 		);

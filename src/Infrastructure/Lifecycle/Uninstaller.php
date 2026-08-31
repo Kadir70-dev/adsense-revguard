@@ -16,7 +16,7 @@ use QuickAdsense\Migration\SchemaVersion;
 use QuickAdsense\Settings\SettingsRepository;
 
 /**
- * Removes data owned by AdSense RevGuard when WordPress deletes the plugin.
+ * Removes data owned by RevGuard for AdSense when WordPress deletes the plugin.
  */
 final class Uninstaller {
 

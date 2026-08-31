@@ -23,7 +23,7 @@ final class ContainerException extends RuntimeException {
 	 */
 	public static function notFound( string $id ): self {
 		return new self(
-			sprintf( 'AdSense RevGuard: service "%s" is not registered in the container.', $id )
+			sprintf( 'RevGuard for AdSense: service "%s" is not registered in the container.', $id )
 		);
 	}
 }

@@ -13,8 +13,8 @@ defined( 'ABSPATH' ) || exit;
 		echo esc_html(
 			sprintf(
 				/* translators: %s: plugin version number. */
-				__( 'AdSense RevGuard v%s', 'adsense-revguard' ),
-				defined( 'ADSENSE_REVGUARD_VERSION' ) ? ADSENSE_REVGUARD_VERSION : '3.0.0'
+				__( 'RevGuard for AdSense v%s', 'revguard-for-adsense' ),
+				defined( 'REVGUARD_FOR_ADSENSE_VERSION' ) ? REVGUARD_FOR_ADSENSE_VERSION : '3.0.0'
 			)
 		);
 		?>

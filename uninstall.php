@@ -1,6 +1,6 @@
 <?php
 /**
- * AdSense RevGuard uninstall entry point.
+ * RevGuard for AdSense uninstall entry point.
  *
  * @package QuickAdsense
  */
@@ -11,16 +11,16 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
 }
 
-$adsense_revguard_autoload = __DIR__ . '/vendor/autoload.php';
+$revguard_for_adsense_autoload = __DIR__ . '/vendor/autoload.php';
 
-if ( ! is_readable( $adsense_revguard_autoload ) ) {
+if ( ! is_readable( $revguard_for_adsense_autoload ) ) {
 	return;
 }
 
-require_once $adsense_revguard_autoload;
+require_once $revguard_for_adsense_autoload;
 
-$adsense_revguard_uninstaller = new \QuickAdsense\Infrastructure\Lifecycle\Uninstaller(
+$revguard_for_adsense_uninstaller = new \QuickAdsense\Infrastructure\Lifecycle\Uninstaller(
 	new \QuickAdsense\Infrastructure\WordPress\WpOptionStore(),
 	new \QuickAdsense\Infrastructure\WordPress\WpTransientStore()
 );
-$adsense_revguard_uninstaller->uninstall();
+$revguard_for_adsense_uninstaller->uninstall();
