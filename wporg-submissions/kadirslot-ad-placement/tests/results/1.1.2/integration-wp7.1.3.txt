@@ -1,0 +1,153 @@
+# WordPress 7.1.3, PHP 8.3.35, WP-CLI 2.12.0
+PASS baseline 1.1.1 reproduces 'Cannot redeclare RevGuardFree\pro_active()' with RevGuard Free active
+PASS install + activate release ZIP
+PASS installed version 1.1.2
+PASS KadirSlot 1.1.2 runtime loaded
+PASS fresh activation stored defaults
+PASS no RevGuardFree namespace declared by KadirSlot
+PASS deactivate
+PASS settings preserved exactly  [{"publisher":"ca-pub-1234567890123456","load_script":true,"slots":{"1":{"enabled":true,"slot":"1111111111","position":"manual","paragraph":2},"2":{"enabled":true,"slot":"2222222222","position":"after_paragraph","paragraph":3},"3":{"enabled":true,"slot":"3333333333","position":"end","paragraph":2}}}]
+PASS settings preserved exactly  [{"publisher":"ca-pub-1234567890123456","load_script":true,"slots":{"1":{"enabled":true,"slot":"1111111111","position":"manual","paragraph":2},"2":{"enabled":true,"slot":"2222222222","position":"after_paragraph","paragraph":3},"3":{"enabled":true,"slot":"3333333333","position":"end","paragraph":2}}}]
+PASS no PHP warnings/notices/fatals from kadirslot-ad-placement (activation lifecycle)
+PASS activate 1.1.2 while RevGuard Free 1.0.1 active: no fatal
+PASS KadirSlot detects older build and stays passive
+PASS 1.0 data untouched while older plugin active
+PASS legacy option deleted after migration
+PASS publisher migrated
+PASS slot 1 migrated
+PASS slot 2 migrated disabled
+PASS slot 3 unsupported -> disabled
+PASS report statuses
+PASS report not autoloaded
+PASS unrelated option untouched
+PASS migration idempotent
+PASS no PHP warnings/notices/fatals from kadirslot-ad-placement (1.0.1 migration)
+PASS 1.1.1 installed
+PASS upgrade 1.1.1 -> 1.1.2 in place, still active
+PASS settings preserved exactly  [{"publisher":"ca-pub-1234567890123456","load_script":true,"slots":{"1":{"enabled":true,"slot":"1111111111","position":"manual","paragraph":2},"2":{"enabled":true,"slot":"2222222222","position":"after_paragraph","paragraph":3},"3":{"enabled":true,"slot":"3333333333","position":"end","paragraph":2}}}]
+PASS KadirSlot is the rendering engine
+PASS shortcode id=4 (beyond 3-slot limit) renders nothing
+PASS shortcode id=1 renders slot 1
+PASS no PHP warnings/notices/fatals from kadirslot-ad-placement (in-place upgrade)
+PASS admin login
+PASS settings page 200
+PASS settings page has exactly 3 slot sections
+PASS save valid settings (302)
+PASS settings preserved exactly  [{"publisher":"ca-pub-1234567890123456","load_script":true,"slots":{"1":{"enabled":true,"slot":"1111111111","position":"manual","paragraph":2},"2":{"enabled":true,"slot":"2222222222","position":"after_paragraph","paragraph":3},"3":{"enabled":true,"slot":"3333333333","position":"end","paragraph":2}}}]
+PASS 4th slot ignored (3-slot limit)
+PASS XSS publisher + slot rejected with errors, prior kept, nothing reflected
+PASS malformed nested-array POST handled (302, no 500)
+PASS malformed POST kept valid IDs and bounded paragraph
+PASS invalid nonce rejected (403)
+PASS missing nonce rejected (403)
+PASS editor blocked from settings page (403)
+PASS editor blocked from options.php save (403)
+PASS anonymous options.php save blocked (redirect to login)
+PASS direct access to includes/plugin.php outputs nothing
+PASS settings preserved exactly  [{"publisher":"ca-pub-1234567890123456","load_script":true,"slots":{"1":{"enabled":true,"slot":"1111111111","position":"manual","paragraph":2},"2":{"enabled":true,"slot":"2222222222","position":"after_paragraph","paragraph":3},"3":{"enabled":true,"slot":"3333333333","position":"end","paragraph":2}}}]
+PASS no PHP warnings/notices/fatals from kadirslot-ad-placement (admin flows)
+PASS post: para3 -> slot2, shortcode slot1, end slot3; id=4 renders nothing
+PASS exactly one AdSense tag, async + crossorigin, no ver
+PASS front.js loaded from new plugin dir
+PASS no other external scripts/iframes
+PASS page gets automatic slot
+PASS feed has no ads
+PASS home/archive: no automatic slots
+PASS no AdSense tag in admin
+PASS duplicate prevention: theme tag kept, own copy skipped
+PASS load_script off: units rendered, no Google tag
+PASS no PHP warnings/notices/fatals from kadirslot-ad-placement (front-end)
+PASS corrupt-object: post/settings/dashboard return 200
+PASS corrupted settings read as safe values  [{"publisher":"ca-pub-1234567890123456","load_script":false,"slots":{"1":{"enabled":true,"slot":"1111111111","position":"after_paragraph","paragraph":2},"2":{"enabled":false,"slot":"","position":"manual","paragraph":2},"3":{"enabled":false,"slot":"","position":"manual","paragraph":2}}}]
+PASS no PHP warnings/notices/fatals from kadirslot-ad-placement (corrupt-object)
+PASS corrupt-raw: post/settings/dashboard return 200
+PASS corrupted settings read as safe values  [{"publisher":"","load_script":true,"slots":{"1":{"enabled":false,"slot":"","position":"manual","paragraph":2},"2":{"enabled":false,"slot":"","position":"manual","paragraph":2},"3":{"enabled":false,"slot":"","position":"manual","paragraph":2}}}]
+PASS no PHP warnings/notices/fatals from kadirslot-ad-placement (corrupt-raw)
+PASS incomplete-class: post/settings/dashboard return 200
+PASS corrupted settings read as safe values  [{"publisher":"ca-pub-1234567890123456","load_script":true,"slots":{"1":{"enabled":true,"slot":"","position":"manual","paragraph":2},"2":{"enabled":false,"slot":"","position":"manual","paragraph":2},"3":{"enabled":false,"slot":"","position":"manual","paragraph":2}}}]
+PASS no PHP warnings/notices/fatals from kadirslot-ad-placement (incomplete-class)
+PASS settings page re-save after corruption works
+PASS settings preserved exactly  [{"publisher":"ca-pub-1234567890123456","load_script":true,"slots":{"1":{"enabled":true,"slot":"1111111111","position":"manual","paragraph":2},"2":{"enabled":true,"slot":"2222222222","position":"after_paragraph","paragraph":3},"3":{"enabled":true,"slot":"3333333333","position":"end","paragraph":2}}}]
+PASS RevGuard Free 1.1.0 [kadirslot-first]: both activate without fatal
+PASS KadirSlot detects older build and stays passive
+PASS RevGuard Free 1.1.0 [kadirslot-first]: single engine (no KadirSlot output, <=3 units, <=1 Google tag)
+PASS RevGuard Free 1.1.0 [kadirslot-first]: admin notice tells the admin to deactivate the older plugin
+PASS settings preserved exactly  [{"publisher":"ca-pub-1234567890123456","load_script":true,"slots":{"1":{"enabled":true,"slot":"1111111111","position":"manual","paragraph":2},"2":{"enabled":true,"slot":"2222222222","position":"after_paragraph","paragraph":3},"3":{"enabled":true,"slot":"3333333333","position":"end","paragraph":2}}}]
+PASS RevGuard Free 1.1.0 [legacy-first]: both activate without fatal
+PASS KadirSlot detects older build and stays passive
+PASS RevGuard Free 1.1.0 [legacy-first]: single engine (no KadirSlot output, <=3 units, <=1 Google tag)
+PASS RevGuard Free 1.1.0 [legacy-first]: admin notice tells the admin to deactivate the older plugin
+PASS settings preserved exactly  [{"publisher":"ca-pub-1234567890123456","load_script":true,"slots":{"1":{"enabled":true,"slot":"1111111111","position":"manual","paragraph":2},"2":{"enabled":true,"slot":"2222222222","position":"after_paragraph","paragraph":3},"3":{"enabled":true,"slot":"3333333333","position":"end","paragraph":2}}}]
+PASS RevGuard Free 1.1.0: after removing older build KadirSlot renders again
+PASS no PHP warnings/notices/fatals from kadirslot-ad-placement (RevGuard Free 1.1.0 coexistence)
+PASS RevGuard Free 1.0.1 [kadirslot-first]: both activate without fatal
+PASS KadirSlot detects older build and stays passive
+PASS RevGuard Free 1.0.1 [kadirslot-first]: single engine (no KadirSlot output, <=3 units, <=1 Google tag)
+PASS RevGuard Free 1.0.1 [kadirslot-first]: admin notice tells the admin to deactivate the older plugin
+PASS settings preserved exactly  [{"publisher":"ca-pub-1234567890123456","load_script":true,"slots":{"1":{"enabled":true,"slot":"1111111111","position":"manual","paragraph":2},"2":{"enabled":true,"slot":"2222222222","position":"after_paragraph","paragraph":3},"3":{"enabled":true,"slot":"3333333333","position":"end","paragraph":2}}}]
+PASS RevGuard Free 1.0.1 [legacy-first]: both activate without fatal
+PASS KadirSlot detects older build and stays passive
+PASS RevGuard Free 1.0.1 [legacy-first]: single engine (no KadirSlot output, <=3 units, <=1 Google tag)
+PASS RevGuard Free 1.0.1 [legacy-first]: admin notice tells the admin to deactivate the older plugin
+PASS settings preserved exactly  [{"publisher":"ca-pub-1234567890123456","load_script":true,"slots":{"1":{"enabled":true,"slot":"1111111111","position":"manual","paragraph":2},"2":{"enabled":true,"slot":"2222222222","position":"after_paragraph","paragraph":3},"3":{"enabled":true,"slot":"3333333333","position":"end","paragraph":2}}}]
+PASS RevGuard Free 1.0.1: after removing older build KadirSlot renders again
+PASS no PHP warnings/notices/fatals from kadirslot-ad-placement (RevGuard Free 1.0.1 coexistence)
+PASS KadirSlot 1.1.1 second copy [kadirslot-first]: both activate without fatal
+PASS KadirSlot detects older build and stays passive
+PASS KadirSlot 1.1.1 second copy [kadirslot-first]: single engine (no KadirSlot output, <=3 units, <=1 Google tag)
+PASS KadirSlot 1.1.1 second copy [kadirslot-first]: admin notice tells the admin to deactivate the older plugin
+PASS settings preserved exactly  [{"publisher":"ca-pub-1234567890123456","load_script":true,"slots":{"1":{"enabled":true,"slot":"1111111111","position":"manual","paragraph":2},"2":{"enabled":true,"slot":"2222222222","position":"after_paragraph","paragraph":3},"3":{"enabled":true,"slot":"3333333333","position":"end","paragraph":2}}}]
+PASS KadirSlot 1.1.1 second copy [legacy-first]: both activate without fatal
+PASS KadirSlot detects older build and stays passive
+PASS KadirSlot 1.1.1 second copy [legacy-first]: single engine (no KadirSlot output, <=3 units, <=1 Google tag)
+PASS KadirSlot 1.1.1 second copy [legacy-first]: admin notice tells the admin to deactivate the older plugin
+PASS settings preserved exactly  [{"publisher":"ca-pub-1234567890123456","load_script":true,"slots":{"1":{"enabled":true,"slot":"1111111111","position":"manual","paragraph":2},"2":{"enabled":true,"slot":"2222222222","position":"after_paragraph","paragraph":3},"3":{"enabled":true,"slot":"3333333333","position":"end","paragraph":2}}}]
+PASS KadirSlot 1.1.1 second copy: after removing older build KadirSlot renders again
+PASS no PHP warnings/notices/fatals from kadirslot-ad-placement (KadirSlot 1.1.1 second copy coexistence)
+PASS second 1.1.2 copy activates without fatal
+PASS two 1.1.2 copies: ads rendered once
+PASS no PHP warnings/notices/fatals from kadirslot-ad-placement (duplicate copy)
+PASS Pro 1.0.1 [kadirslot-first]: both activate without fatal
+PASS Pro detected
+PASS KadirSlot renders nothing while Pro is active
+PASS KadirSlot settings unchanged by Pro  [{"publisher":"ca-pub-1234567890123456","load_script":true,"slots":{"1":{"enabled":true,"slot":"1111111111","position":"manual","paragraph":2},"2":{"enabled":true,"slot":"2222222222","position":"after_paragraph","paragraph":3},"3":{"enabled":true,"slot":"3333333333","position":"end","paragraph":2}}}]
+PASS Pro 1.0.1 [kadirslot-first]: KadirSlot adds no markup or scripts on the front end
+INFO Pro 1.0.1 [kadirslot-first]: Pro output units=0 google-tags=0
+PASS Pro 1.0.1 [kadirslot-first]: KadirSlot settings page explains Pro handles rendering
+PASS settings preserved exactly  [{"publisher":"ca-pub-1234567890123456","load_script":true,"slots":{"1":{"enabled":true,"slot":"1111111111","position":"manual","paragraph":2},"2":{"enabled":true,"slot":"2222222222","position":"after_paragraph","paragraph":3},"3":{"enabled":true,"slot":"3333333333","position":"end","paragraph":2}}}]
+PASS Pro 1.0.1 [kadirslot-first]: after Pro deactivation KadirSlot renders again
+PASS no PHP warnings/notices/fatals from kadirslot-ad-placement (Pro 1.0.1 kadirslot-first)
+PASS Pro 1.0.1 [pro-first]: both activate without fatal
+PASS Pro detected
+PASS KadirSlot renders nothing while Pro is active
+PASS KadirSlot settings unchanged by Pro  [{"publisher":"ca-pub-1234567890123456","load_script":true,"slots":{"1":{"enabled":true,"slot":"1111111111","position":"manual","paragraph":2},"2":{"enabled":true,"slot":"2222222222","position":"after_paragraph","paragraph":3},"3":{"enabled":true,"slot":"3333333333","position":"end","paragraph":2}}}]
+PASS Pro 1.0.1 [pro-first]: KadirSlot adds no markup or scripts on the front end
+INFO Pro 1.0.1 [pro-first]: Pro output units=0 google-tags=0
+PASS Pro 1.0.1 [pro-first]: KadirSlot settings page explains Pro handles rendering
+PASS settings preserved exactly  [{"publisher":"ca-pub-1234567890123456","load_script":true,"slots":{"1":{"enabled":true,"slot":"1111111111","position":"manual","paragraph":2},"2":{"enabled":true,"slot":"2222222222","position":"after_paragraph","paragraph":3},"3":{"enabled":true,"slot":"3333333333","position":"end","paragraph":2}}}]
+PASS Pro 1.0.1 [pro-first]: after Pro deactivation KadirSlot renders again
+PASS no PHP warnings/notices/fatals from kadirslot-ad-placement (Pro 1.0.1 pro-first)
+PASS Pro 1.1.0 [kadirslot-first]: both activate without fatal
+PASS Pro detected
+PASS KadirSlot renders nothing while Pro is active
+PASS KadirSlot settings unchanged by Pro  [{"publisher":"ca-pub-1234567890123456","load_script":true,"slots":{"1":{"enabled":true,"slot":"1111111111","position":"manual","paragraph":2},"2":{"enabled":true,"slot":"2222222222","position":"after_paragraph","paragraph":3},"3":{"enabled":true,"slot":"3333333333","position":"end","paragraph":2}}}]
+PASS Pro 1.1.0 [kadirslot-first]: KadirSlot adds no markup or scripts on the front end
+INFO Pro 1.1.0 [kadirslot-first]: Pro output units=3 google-tags=3
+PASS Pro 1.1.0 [kadirslot-first]: KadirSlot settings page explains Pro handles rendering
+PASS settings preserved exactly  [{"publisher":"ca-pub-1234567890123456","load_script":true,"slots":{"1":{"enabled":true,"slot":"1111111111","position":"manual","paragraph":2},"2":{"enabled":true,"slot":"2222222222","position":"after_paragraph","paragraph":3},"3":{"enabled":true,"slot":"3333333333","position":"end","paragraph":2}}}]
+PASS Pro 1.1.0 [kadirslot-first]: after Pro deactivation KadirSlot renders again
+PASS no PHP warnings/notices/fatals from kadirslot-ad-placement (Pro 1.1.0 kadirslot-first)
+PASS Pro 1.1.0 [pro-first]: both activate without fatal
+PASS Pro detected
+PASS KadirSlot renders nothing while Pro is active
+PASS KadirSlot settings unchanged by Pro  [{"publisher":"ca-pub-1234567890123456","load_script":true,"slots":{"1":{"enabled":true,"slot":"1111111111","position":"manual","paragraph":2},"2":{"enabled":true,"slot":"2222222222","position":"after_paragraph","paragraph":3},"3":{"enabled":true,"slot":"3333333333","position":"end","paragraph":2}}}]
+PASS Pro 1.1.0 [pro-first]: KadirSlot adds no markup or scripts on the front end
+INFO Pro 1.1.0 [pro-first]: Pro output units=3 google-tags=3
+PASS Pro 1.1.0 [pro-first]: KadirSlot settings page explains Pro handles rendering
+PASS settings preserved exactly  [{"publisher":"ca-pub-1234567890123456","load_script":true,"slots":{"1":{"enabled":true,"slot":"1111111111","position":"manual","paragraph":2},"2":{"enabled":true,"slot":"2222222222","position":"after_paragraph","paragraph":3},"3":{"enabled":true,"slot":"3333333333","position":"end","paragraph":2}}}]
+PASS Pro 1.1.0 [pro-first]: after Pro deactivation KadirSlot renders again
+PASS no PHP warnings/notices/fatals from kadirslot-ad-placement (Pro 1.1.0 pro-first)
+PASS no server-side HTTP requests made by kadirslot-ad-placement
+PASS settings preserved exactly  [{"publisher":"ca-pub-1234567890123456","load_script":true,"slots":{"1":{"enabled":true,"slot":"1111111111","position":"manual","paragraph":2},"2":{"enabled":true,"slot":"2222222222","position":"after_paragraph","paragraph":3},"3":{"enabled":true,"slot":"3333333333","position":"end","paragraph":2}}}]
+PASS delete plugin keeps settings (documented: no uninstall cleanup)
+PASS no PHP warnings/notices/fatals from kadirslot-ad-placement (final)

@@ -1,0 +1,10 @@
+# Plugin Check 2.1.0
+# checked plugin version: 1.1.2, status: active
+checks available: 34
+all stable checks exit: 0
+Success: Checks complete. No errors found.
+stable + experimental exit: 0
+Success: Checks complete. No errors found.
+runtime checks only exit: 0
+Success: Checks complete. No errors found.
+control (RevGuard Free 1.0.1) findings: 10

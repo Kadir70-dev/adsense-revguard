@@ -1,0 +1,47 @@
+# Offline WordPress integration stack for KadirSlot Ad Placement. Run through tests/integration/run.sh.
+# Required env: DB_PASS, DIST_DIR (folder with the release ZIP), WPCLI (path to wp-cli.phar), ARTIFACTS,
+# EXTRA_DIR (folder with plugin-check.zip and RevGuard Pro ZIPs; not committed). Optional: WP_IMAGE, WP_CORE_DIR (bind-mounted core).
+name: kadirslot-qa
+services:
+  db:
+    image: mariadb:11.4
+    environment:
+      MARIADB_DATABASE: wordpress
+      MARIADB_USER: wordpress
+      MARIADB_PASSWORD: ${DB_PASS}
+      MARIADB_RANDOM_ROOT_PASSWORD: "1"
+    tmpfs: [/var/lib/mysql]
+    networks: [internal]
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 3s
+      retries: 40
+  wordpress:
+    image: ${WP_IMAGE:-wordpress:php8.3-apache}
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: ${DB_PASS}
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DEBUG: "1"
+      WORDPRESS_CONFIG_EXTRA: |
+        define('WP_DEBUG_LOG', '/var/www/html/wp-content/debug.log');
+        define('WP_DEBUG_DISPLAY', false);
+        define('WP_HOME', 'http://localhost');
+        define('WP_SITEURL', 'http://localhost');
+        define('FS_METHOD', 'direct');
+    volumes:
+      - ${WP_CORE_DIR:-wp}:/var/www/html
+      - ./mu-plugins:/qa/mu-plugins:ro
+      - ./scripts:/qa/scripts:ro
+      - ../fixtures:/qa/fixtures:ro
+      - ${DIST_DIR}:/qa/dist:ro
+      - ${EXTRA_DIR}:/qa/extra:ro
+      - ${WPCLI}:/usr/local/bin/wp-cli.phar:ro
+      - ${ARTIFACTS}:/qa/artifacts
+    networks: [internal]
+    depends_on: {db: {condition: service_healthy}}
+networks:
+  internal: {internal: true}
+volumes:
+  wp: {}

@@ -4,7 +4,7 @@ Tags: adsense, ads, advertising, ad insertion, shortcodes
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 8.2
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,7 +31,7 @@ You are responsible for following the AdSense program policies and for any conse
 
 == Installation ==
 1. Upload the ZIP via Plugins > Add New Plugin > Upload Plugin.
-2. If the older RevGuard Free plugin is installed, deactivate it before activating KadirSlot Ad Placement. The existing settings are retained.
+2. If the older RevGuard Free plugin is installed, deactivate it. KadirSlot Ad Placement uses the same saved settings and stays paused, without showing ads, while RevGuard Free is still active.
 3. Activate KadirSlot Ad Placement.
 4. Go to Settings > KadirSlot Ad Placement.
 5. Enter your AdSense publisher ID (ca-pub- followed by 16 digits) and, for each slot, the ad unit ID from your AdSense account.
@@ -57,6 +57,11 @@ Saved settings remain unless manually deleted. Deactivation also preserves confi
 Yes. The existing RevGuard Pro integration check remains unchanged; while that companion plugin is active it handles ad rendering and KadirSlot Ad Placement outputs nothing. Saved Free settings are kept for when Pro is deactivated.
 
 == Changelog ==
+= 1.1.2 =
+* Fixed a fatal error ("Cannot redeclare") when KadirSlot Ad Placement and the older RevGuard Free plugin were active at the same time. The plugin code now uses its own namespace.
+* While RevGuard Free is still active, KadirSlot Ad Placement stays paused so ads are never shown twice.
+* Corrupted or unexpected saved values, such as a non-numeric paragraph number, now fall back to safe defaults without PHP warnings.
+
 = 1.1.1 =
 * Renamed plugin and text domain for directory naming compliance; preserves existing settings and the [revguard_ad] shortcode.
 * Strengthened validation for invalid typed inputs in the Settings API.
@@ -76,6 +81,9 @@ Yes. The existing RevGuard Pro integration check remains unchanged; while that c
 * First free edition: three slots, automatic insertion, shortcode, secure admin form.
 
 == Upgrade Notice ==
+= 1.1.2 =
+Fixes a fatal error when the older RevGuard Free plugin is also active, and hardens handling of corrupted settings. Settings and the shortcode are unchanged.
+
 = 1.1.1 =
 New name, same stored configuration and shortcode. Custom ad code was already replaced in version 1.1.0.
 

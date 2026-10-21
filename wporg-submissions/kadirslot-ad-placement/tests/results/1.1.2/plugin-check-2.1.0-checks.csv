@@ -1,0 +1,35 @@
+slug,category,stability
+i18n_usage,"general, plugin_repo",stable
+php_error_reporting,general,stable
+code_obfuscation,plugin_repo,stable
+plugin_content,plugin_repo,stable
+file_type,plugin_repo,stable
+plugin_header_fields,plugin_repo,stable
+late_escaping,"security, plugin_repo",stable
+safe_redirect,"security, plugin_repo",stable
+plugin_updater,plugin_repo,stable
+plugin_uninstall,plugin_repo,stable
+plugin_review_phpcs,plugin_repo,stable
+direct_db_queries,"security, plugin_repo",stable
+performant_wp_query_params,performance,stable
+enqueued_scripts_in_footer,performance,stable
+enqueued_resources,"plugin_repo, performance",stable
+plugin_readme,plugin_repo,stable
+localhost,plugin_repo,stable
+no_unfiltered_uploads,plugin_repo,stable
+trademarks,plugin_repo,stable
+offloading_files,plugin_repo,stable
+write_file,plugin_repo,stable
+setting_sanitization,plugin_repo,stable
+prefixing,plugin_repo,stable
+direct_db,"security, plugin_repo",stable
+minified_files,plugin_repo,stable
+direct_file_access,"security, plugin_repo",stable
+external_admin_menu_links,plugin_repo,stable
+wp_functions_compatibility,plugin_repo,stable
+ai_provider,general,stable
+enqueued_scripts_size,performance,stable
+enqueued_styles_size,performance,stable
+enqueued_styles_scope,performance,stable
+enqueued_scripts_scope,performance,stable
+non_blocking_scripts,performance,stable
