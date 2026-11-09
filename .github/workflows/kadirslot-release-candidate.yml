@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   test:
@@ -45,3 +45,13 @@ jobs:
           name: kadirslot-ad-placement-1.1.3-rc
           path: wporg-submissions/kadirslot-ad-placement/kadirslot-ad-placement-1.1.3.zip
           if-no-files-found: error
+      - name: Commit validated ZIP on release branch
+        if: github.event_name == 'push'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add wporg-submissions/kadirslot-ad-placement/kadirslot-ad-placement-1.1.3.zip
+          if ! git diff --cached --quiet; then
+            git commit -m "build(kadirslot): add verified 1.1.3 release candidate ZIP"
+            git push origin HEAD:feat/kadirslot-growth-1.1.3
+          fi
