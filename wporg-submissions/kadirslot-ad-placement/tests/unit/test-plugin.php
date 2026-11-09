@@ -18,7 +18,7 @@ $good = ['publisher' => $pub, 'load_script' => true, 'slots' => [
     3 => ['enabled' => true, 'slot' => '3333333333', 'position' => 'end', 'paragraph' => 2],
 ]];
 
-check('version constant is 1.1.2', VERSION === '1.1.2');
+check('version constant is 1.1.3', VERSION === '1.1.3');
 check('bootstrap defines file constant', defined('KADIRSLOT_AD_PLACEMENT_FILE'));
 check('no RevGuardFree symbols declared', !function_exists('RevGuardFree\\pro_active') && !defined('RevGuardFree\\VERSION'));
 check('legacy plugin not detected when absent', legacy_active() === false);
@@ -171,9 +171,16 @@ ad(1); check('load_script off: Google script not enqueued', !isset($GLOBALS['t_e
 // --- boot / shortcode / activation ------------------------------------------------------------------------------
 $GLOBALS['t_options'] = [OPTION => $good]; $GLOBALS['t_hooks'] = []; $GLOBALS['t_shortcodes'] = [];
 boot();
-check('boot registers content filter + shortcode', t_hook_count('the_content') === 1 && count($GLOBALS['t_shortcodes']['revguard_ad'] ?? []) === 1);
+check('boot registers content filter + both shortcodes', t_hook_count('the_content') === 1
+    && count($GLOBALS['t_shortcodes']['revguard_ad'] ?? []) === 1
+    && count($GLOBALS['t_shortcodes']['kadirslot_ad'] ?? []) === 1);
 $sc = $GLOBALS['t_shortcodes']['revguard_ad'][0];
 check('shortcode id=2', str_contains($sc(['id' => '2']), '2222222222'));
+$new_sc = $GLOBALS['t_shortcodes']['kadirslot_ad'][0];
+check('new shortcode id=2', str_contains($new_sc(['id' => '2'], null, 'kadirslot_ad'), '2222222222'));
+check('new + legacy shortcode output matches', $new_sc(['id' => '1'], null, 'kadirslot_ad') === $sc(['id' => '1'], null, 'revguard_ad'));
+check('new shortcode rejects invalid id', $new_sc(['id' => 'invalid'], null, 'kadirslot_ad') === '');
+check('new shortcode honors default id 1', str_contains($new_sc([], null, 'kadirslot_ad'), '1111111111'));
 foreach (['empty string' => '', 'array' => [], 'object attr' => ['id' => $obj], 'nested' => ['id' => ['1']], 'big' => ['id' => '99999999999999999999'], 'neg' => ['id' => '-1']] as $label => $atts) {
     $out = no_warning("shortcode $label no warning", static fn() => $sc($atts));
     if ($label !== 'empty string' && $label !== 'array') { check("shortcode $label renders nothing", $out === ''); }
