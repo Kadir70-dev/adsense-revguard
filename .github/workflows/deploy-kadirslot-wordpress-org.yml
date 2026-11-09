@@ -1,0 +1,136 @@
+name: KadirSlot 1.1.3 - WordPress.org publish
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/deploy-kadirslot-wordpress-org.yml
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "Verify only (safe), or publish KadirSlot 1.1.3 to WordPress.org"
+        required: true
+        type: choice
+        default: verify
+        options:
+          - verify
+          - publish
+      confirmation:
+        description: "For publish only, type exactly PUBLISH KADIRSLOT 1.1.3"
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: kadirslot-wordpress-org-publish
+  cancel-in-progress: false
+
+jobs:
+  kadirslot:
+    name: Validate and optionally publish to WordPress.org SVN
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      SVN_URL: https://plugins.svn.wordpress.org/kadirslot-ad-placement
+      SOURCE: wporg-submissions/kadirslot-ad-placement
+      EXPECTED_ZIP_SHA256: b5a466b3f3e4ee4bc6e52f68d1f2eb7b9b67d3f7f199b51e363c1d0d9e65b171
+      EXPECTED_OLD_STABLE_TAG: '1.1.2'
+      RELEASE_VERSION: '1.1.3'
+    steps:
+      - name: Check out fixed, tested KadirSlot commit (not repository main)
+        uses: actions/checkout@v4
+        with:
+          ref: 418f8c3901f0871c017872e421932a4d96a34aaa
+          persist-credentials: false
+
+      - name: Install PHP 8.2
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          tools: none
+          coverage: none
+
+      - name: Validate source, compatibility, and deterministic install ZIP
+        run: |
+          set -euo pipefail
+          test -f "$SOURCE/source/kadirslot-ad-placement.php"
+          grep -Fq "Version: 1.1.3" "$SOURCE/source/kadirslot-ad-placement.php"
+          grep -Fxq "Stable tag: 1.1.3" "$SOURCE/source/readme.txt"
+          grep -Fq "const VERSION = '1.1.3';" "$SOURCE/source/includes/plugin.php"
+          (cd "$SOURCE" && sh tests/run-unit.sh && sh tools/build-zip.sh)
+          echo "$EXPECTED_ZIP_SHA256  $SOURCE/kadirslot-ad-placement-1.1.3.zip" | sha256sum -c -
+          unzip -t "$SOURCE/kadirslot-ad-placement-1.1.3.zip"
+          test "$(unzip -Z1 "$SOURCE/kadirslot-ad-placement-1.1.3.zip" | grep -cE '^kadirslot-ad-placement/[^/]+\.php$')" -eq 1
+
+      - name: Verify private SVN secrets are configured (values never printed)
+        env:
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+        run: |
+          test -n "$SVN_USERNAME" || { echo "::error::Missing SVN_USERNAME repository secret"; exit 1; }
+          test -n "$SVN_PASSWORD" || { echo "::error::Missing SVN_PASSWORD repository secret"; exit 1; }
+          echo "SVN credentials present; authentication is confirmed only at commit time."
+
+      - name: Check WordPress.org repository and prevent duplicate/outdated release
+        run: |
+          set -euo pipefail
+          svn info "$SVN_URL" > /dev/null
+          stable="$(svn cat "$SVN_URL/trunk/readme.txt" | sed -n 's/^Stable tag: *//p' | head -n 1 | tr -d '\r')"
+          echo "Current SVN trunk stable tag: $stable"
+          test "$stable" = "$EXPECTED_OLD_STABLE_TAG" || {
+            echo "::error::Trunk stable tag differs from 1.1.2. Review the live SVN before releasing."
+            exit 1
+          }
+          if svn ls "$SVN_URL/tags/$RELEASE_VERSION" > /dev/null 2>&1; then
+            echo "::error::SVN tag $RELEASE_VERSION already exists. Aborting to avoid overwriting an existing release."
+            exit 1
+          fi
+          echo "Preflight passed. No changes were made to WordPress.org."
+
+      - name: Require explicit approval for publication
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.mode == 'publish' }}
+        env:
+          CONFIRMATION: ${{ inputs.confirmation }}
+        run: |
+          test "$CONFIRMATION" = "PUBLISH KADIRSLOT 1.1.3" || {
+            echo "::error::Publish confirmation does not match. No SVN changes made."
+            exit 1
+          }
+
+      - name: Deploy validated release to WordPress.org SVN (irreversible public release)
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.mode == 'publish' }}
+        env:
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+        run: |
+          set -euo pipefail
+          WC="$RUNNER_TEMP/kadirslot-svn"
+          svn checkout --depth immediates "$SVN_URL" "$WC"
+          svn update --set-depth infinity "$WC/trunk"
+          svn update --set-depth immediates "$WC/tags"
+          rsync -a --delete "$SOURCE/source/" "$WC/trunk/"
+          # SVN tracks deletions separately. Stage missing files before adding new files.
+          python3 - "$WC/trunk" <<'PY'
+          import subprocess, sys, xml.etree.ElementTree as ET
+          root = sys.argv[1]
+          xml = subprocess.check_output(['svn', 'status', '--xml', root], text=True)
+          for entry in ET.fromstring(xml).iter('entry'):
+              state = entry.find('wc-status')
+              if state is not None and state.attrib.get('item') == 'missing':
+                  subprocess.run(['svn', 'delete', '--force', entry.attrib['path']], check=True)
+          PY
+          svn add --force --depth infinity "$WC/trunk"
+          svn copy "$WC/trunk" "$WC/tags/$RELEASE_VERSION"
+          echo "SVN changes to be published:"
+          svn status "$WC"
+          svn commit "$WC" --non-interactive --no-auth-cache \
+            --username "$SVN_USERNAME" --password "$SVN_PASSWORD" \
+            -m "KadirSlot Ad Placement $RELEASE_VERSION: branded shortcode, docs and discoverability"
+
+      - name: Verify SVN release tag after publication
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.mode == 'publish' }}
+        run: |
+          test "$(svn cat "$SVN_URL/tags/$RELEASE_VERSION/readme.txt" | sed -n 's/^Stable tag: *//p' | head -n 1 | tr -d '\r')" = "$RELEASE_VERSION"
+          echo "WordPress.org SVN tag $RELEASE_VERSION confirmed. Directory listing updates may lag."
