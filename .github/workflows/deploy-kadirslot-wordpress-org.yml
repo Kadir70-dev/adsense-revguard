@@ -80,6 +80,11 @@ jobs:
             echo "Both SVN secret names resolved (actual SVN authentication is verified only at commit time)."
           fi
 
+      - name: Install Subversion command-line client
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq subversion rsync
+
       - name: Check WordPress.org repository and prevent duplicate/outdated release
         run: |
           set -euo pipefail
