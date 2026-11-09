@@ -5,7 +5,8 @@ This folder tracks the WordPress.org resubmission of the former **RevGuard Free*
 - Proposed name: **KadirSlot Ad Placement**
 - Requested new slug and text domain: `kadirslot-ad-placement` (not yet approved or reserved)
 - WordPress.org contributor: `abdulkadirco`
-- Current package: `kadirslot-ad-placement-1.1.2.zip`
+- Published release: `kadirslot-ad-placement-1.1.2.zip`
+- Proposed next release: **1.1.3**, on branch `feat/kadirslot-growth-1.1.3` (NOT published to WordPress.org).
 - Package SHA-256: `608ec18991373168e81d932207165feecf54cb94f7b0927edb083b47c6090143` (6 files; rebuilt identically by `tools/build-zip.sh`)
 - Previous package: `kadirslot-ad-placement-1.1.1.zip` (SHA-256 `71a9ffd0…6e18d`), superseded.
 
@@ -29,6 +30,13 @@ PHP="docker run --rm -v $PWD:$PWD php:8.2-cli php" tests/run-unit.sh
 # extra/ holds plugin-check.zip (2.1.0) and optional revguard-pro-*.zip packages; they are not committed.
 tests/integration/run.sh kadirslot-ad-placement-1.1.2.zip /path/to/wp-cli.phar extra/ artifacts/ [wp-6.0-core-dir]
 ```
+
+## 1.1.3 candidate — discoverability and shortcode
+
+- Adds a branded `[kadirslot_ad id="1"]` shortcode while preserving `[revguard_ad id="1"]` and saved options.
+- Improves the WordPress.org listing with audience, features, setup steps, FAQs and more specific tags.
+- Bumps the PHP header, runtime constant and readme stable tag together.
+- Pending CI validation and WordPress.org SVN deployment; 1.1.2 remains the published production release.
 
 ## 1.1.2 results
 
