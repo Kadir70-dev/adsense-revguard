@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1544" height="500" viewBox="0 0 1544 500">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#101B3F"/><stop offset=".6" stop-color="#17386F"/><stop offset="1" stop-color="#10234B"/>
+  </linearGradient>
+  <linearGradient id="card" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#263F78"/><stop offset="1" stop-color="#152A57"/>
+  </linearGradient>
+  <filter id="shadow"><feDropShadow dx="0" dy="18" stdDeviation="25" flood-color="#031026" flood-opacity=".4"/></filter>
+</defs>
+<rect width="1544" height="500" fill="url(#bg)"/>
+<circle cx="1440" cy="-160" r="470" fill="#5B80E5" opacity=".07"/>
+<circle cx="1190" cy="440" r="450" fill="#35D3B9" opacity=".065"/>
+<g stroke="#FFFFFF" opacity=".055">
+  <path d="M0 400H1544 M0 320H1544 M0 240H1544 M0 160H1544 M0 80H1544"/>
+  <path d="M920 0V500 M1000 0V500 M1080 0V500 M1160 0V500 M1240 0V500 M1320 0V500 M1400 0V500 M1480 0V500"/>
+</g>
+<rect x="89" y="78" width="91" height="91" rx="25" fill="#4FE0C3"/>
+<path d="M116 100V148 M139 123L159 101 M139 123L159 146" fill="none" stroke="#102047" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="208" y="147" font-family="DejaVu Sans,Arial,sans-serif" font-size="57" font-weight="700" fill="#FFFFFF" letter-spacing="-2">KadirSlot</text>
+<text x="90" y="248" font-family="DejaVu Sans,Arial,sans-serif" font-size="51" font-weight="700" fill="#FFFFFF">AdSense placement,</text>
+<text x="90" y="315" font-family="DejaVu Sans,Arial,sans-serif" font-size="51" font-weight="700" fill="#52E2C8">made simple.</text>
+<text x="91" y="371" font-family="DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="400" fill="#C2D5F2">Responsive ads. Simple setup. No clutter.</text>
+<g filter="url(#shadow)">
+  <rect x="876" y="106" width="578" height="306" rx="25" fill="url(#card)" stroke="#7897DB" stroke-opacity=".3" stroke-width="2"/>
+  <rect x="901" y="126" width="528" height="34" rx="12" fill="#344F8B"/>
+  <circle cx="923" cy="142" r="6" fill="#6AE4CE"/><circle cx="944" cy="142" r="6" fill="#A7BDE5"/><circle cx="965" cy="142" r="6" fill="#A7BDE5"/>
+  <rect x="910" y="194" width="505" height="63" rx="13" fill="#243E72" stroke="#5574B2" stroke-width="2"/>
+  <rect x="927" y="210" width="43" height="34" rx="9" fill="#55E4C9"/>
+  <text x="937" y="234" font-family="DejaVu Sans,Arial,sans-serif" font-size="18" font-weight="700" fill="#102344">01</text>
+  <text x="991" y="233" font-family="DejaVu Sans,Arial,sans-serif" font-size="22" fill="#FFFFFF">Responsive Ad Slot</text>
+  <rect x="910" y="271" width="505" height="63" rx="13" fill="#243E72" stroke="#5574B2" stroke-width="2"/>
+  <rect x="927" y="287" width="43" height="34" rx="9" fill="#55E4C9"/>
+  <text x="937" y="311" font-family="DejaVu Sans,Arial,sans-serif" font-size="18" font-weight="700" fill="#102344">02</text>
+  <text x="991" y="310" font-family="DejaVu Sans,Arial,sans-serif" font-size="22" fill="#FFFFFF">Flexible Placement</text>
+  <rect x="910" y="348" width="505" height="43" rx="12" fill="#122750"/>
+  <text x="932" y="377" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#66EBD2">[kadirslot_ad id=&quot;1&quot;]</text>
+</g>
+</svg>
