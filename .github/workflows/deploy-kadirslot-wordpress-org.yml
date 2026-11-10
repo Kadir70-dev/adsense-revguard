@@ -71,13 +71,13 @@ jobs:
           RELEASE_MODE: ${{ inputs.mode }}
         run: |
           if [[ -z "$SVN_USERNAME" || -z "$SVN_PASSWORD" ]]; then
-            if [[ "$RELEASE_MODE" == "publish" ]]; then
-              echo "::error::SVN_USERNAME and SVN_PASSWORD must both be present as repository Actions secrets."
+            if [[ "$GITHUB_EVENT_NAME" == "workflow_dispatch" || "$RELEASE_MODE" == "publish" ]]; then
+              echo "::error::Manual verification requires SVN_USERNAME and SVN_PASSWORD as GitHub Actions repository secrets. A green result must not imply secrets exist when absent."
               exit 1
             fi
-            echo "::warning::WordPress.org SVN secrets not detected in this repository. Verify-only checks will continue, but publication is blocked."
+            echo "::warning::WordPress.org SVN secrets missing. Automated push preflight is read-only; publication is blocked."
           else
-            echo "Both SVN secret names resolved (actual SVN authentication is verified only at commit time)."
+            echo "Both SVN secret names resolved. Password validity is not proven until authenticated SVN write."
           fi
 
       - name: Install Subversion command-line client
@@ -122,7 +122,7 @@ jobs:
           svn checkout --depth immediates "$SVN_URL" "$WC"
           svn update --set-depth infinity "$WC/trunk"
           svn update --set-depth immediates "$WC/tags"
-          rsync -a --delete "$SOURCE/source/" "$WC/trunk/"
+          rsync -a --delete --exclude='.svn/' "$SOURCE/source/" "$WC/trunk/"
           # SVN tracks deletions separately. Stage missing files before adding new files.
           python3 - "$WC/trunk" <<'PY'
           import subprocess, sys, xml.etree.ElementTree as ET
