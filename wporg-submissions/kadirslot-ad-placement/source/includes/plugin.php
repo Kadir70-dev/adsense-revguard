@@ -10,7 +10,7 @@ declare(strict_types=1);
 namespace KadirSlotAdPlacement;
 if (!defined('ABSPATH')) { exit; }
 
-const VERSION = '1.1.2';
+const VERSION = '1.1.3';
 const OPTION = 'revguard_free_settings';
 /** 1.0.x option holding raw ad code. Read only by the one-time migration. */
 const LEGACY_OPTION = 'revguard_free_slots';
@@ -299,7 +299,7 @@ function screen(): void {
     $s = settings();
     $name = OPTION;
     echo '<div class="wrap rgf-admin"><h1>' . esc_html__('KadirSlot Ad Placement — AdSense Slots', 'kadirslot-ad-placement') . '</h1>';
-    echo '<p>' . esc_html__('Show up to 3 Google AdSense display units on posts and pages. Enter the IDs from your AdSense account; the plugin builds the official ad code. Use the shortcode [revguard_ad id="1"] for manual placement.', 'kadirslot-ad-placement') . '</p>';
+    echo '<p>' . esc_html__('Show up to 3 Google AdSense display units on posts and pages. Enter the IDs from your AdSense account; the plugin builds the official ad code. Use [kadirslot_ad id="1"] for manual placement (the existing [revguard_ad id="1"] also works).', 'kadirslot-ad-placement') . '</p>';
     if (pro_active()) {
         echo '<div class="notice notice-info inline"><p>' . esc_html__('The compatible premium plugin is active and handles all ad rendering. KadirSlot Ad Placement settings remain saved and are used again if Pro is deactivated.', 'kadirslot-ad-placement') . '</p></div>';
     }
@@ -346,10 +346,15 @@ function boot(): void {
     }
     migrate();
     add_filter('the_content', __NAMESPACE__ . '\\inject', 20);
-    add_shortcode('revguard_ad', static function ($attrs): string {
-        $vals = shortcode_atts(['id' => 1], is_array($attrs) ? $attrs : [], 'revguard_ad');
+    // Keep the original shortcode working for existing posts, and expose a brand-name alias.
+    // Pass the actual shortcode tag to shortcode_atts() so legacy attribute filters keep working.
+    $render_shortcode = static function ($attrs, $content = null, string $tag = 'revguard_ad'): string {
+        $tag = $tag === 'kadirslot_ad' ? 'kadirslot_ad' : 'revguard_ad';
+        $vals = shortcode_atts(['id' => 1], is_array($attrs) ? $attrs : [], $tag);
         return ad(bounded_int($vals['id'], 0, 0, MAX_SLOTS + 1));
-    });
+    };
+    add_shortcode('revguard_ad', $render_shortcode);
+    add_shortcode('kadirslot_ad', $render_shortcode);
     add_filter('script_loader_tag', __NAMESPACE__ . '\\script_tag', 10, 2);
     add_action('wp_print_footer_scripts', __NAMESPACE__ . '\\dedupe_script', 9);
     add_action('admin_init', static function (): void {

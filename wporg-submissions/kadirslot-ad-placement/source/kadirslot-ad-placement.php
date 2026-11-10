@@ -2,7 +2,7 @@
 /**
  * Plugin Name: KadirSlot Ad Placement
  * Description: Lightweight Google AdSense placement with three ad slots, automatic placements and shortcodes.
- * Version: 1.1.2
+ * Version: 1.1.3
  * Requires at least: 6.0
  * Requires PHP: 8.2
  * Author: Abdul Kadir
