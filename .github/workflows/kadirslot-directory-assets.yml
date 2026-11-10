@@ -1,11 +1,6 @@
 name: KadirSlot WordPress.org directory creative
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - .github/workflows/kadirslot-directory-assets.yml
-      - marketing/kadirslot/creative/**
   workflow_dispatch:
     inputs:
       mode:
@@ -31,7 +26,7 @@ concurrency:
 jobs:
   assets:
     name: Validate brand assets and optionally publish
-    if: "${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && startsWith(github.event.head_commit.message, 'growth: publish original KadirSlot directory assets')) }}"
+    if: "${{ github.event_name == 'workflow_dispatch' }}"
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
@@ -82,19 +77,17 @@ jobs:
           echo "KadirSlot 1.1.3 SVN found. Preview QA complete."
 
       - name: Validate explicit publish approval and secure SVN secrets
-        if: "${{ (github.event_name == 'push' && startsWith(github.event.head_commit.message, 'growth: publish original KadirSlot directory assets')) || (github.event_name == 'workflow_dispatch' && inputs.mode == 'publish') }}"
+        if: "${{ github.event_name == 'workflow_dispatch' && inputs.mode == 'publish' }}"
         env:
           SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
           SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
           CONFIRMATION: ${{ inputs.confirmation }}
         run: |
           set -euo pipefail
-          if [[ "$GITHUB_EVENT_NAME" == "workflow_dispatch" ]]; then
-            test "$CONFIRMATION" = "PUBLISH KADIRSLOT ASSETS" || {
-              echo "::error::Explicit publish approval missing."
-              exit 1
-            }
-          fi
+          test "$CONFIRMATION" = "PUBLISH KADIRSLOT ASSETS" || {
+            echo "::error::Explicit publish approval missing."
+            exit 1
+          }
           test -n "$SVN_USERNAME" && test -n "$SVN_PASSWORD" || {
             echo "::error::Missing SVN_USERNAME or SVN_PASSWORD Actions repository secrets."
             exit 1
@@ -102,7 +95,7 @@ jobs:
           echo "Approval and credential presence checked. Secrets not printed."
 
       - name: Publish directory assets only (do not change plugin code)
-        if: "${{ (github.event_name == 'push' && startsWith(github.event.head_commit.message, 'growth: publish original KadirSlot directory assets')) || (github.event_name == 'workflow_dispatch' && inputs.mode == 'publish') }}"
+        if: "${{ github.event_name == 'workflow_dispatch' && inputs.mode == 'publish' }}"
         env:
           SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
           SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
