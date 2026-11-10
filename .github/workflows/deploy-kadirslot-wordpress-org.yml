@@ -102,7 +102,7 @@ jobs:
           echo "Preflight passed. No changes were made to WordPress.org."
 
       - name: Require explicit approval for publication
-        if: ${{ (github.event_name == 'workflow_dispatch' && inputs.mode == 'publish') || (github.event_name == 'push' && github.event.head_commit.message == 'release(kadirslot): one-time authorized WordPress.org 1.1.3 publish') }}
+        if: "${{ (github.event_name == 'workflow_dispatch' && inputs.mode == 'publish') || (github.event_name == 'push' && github.event.head_commit.message == 'release(kadirslot): one-time authorized WordPress.org 1.1.3 publish') }}"
         env:
           CONFIRMATION: ${{ inputs.confirmation }}
         run: |
@@ -116,7 +116,7 @@ jobs:
           fi
 
       - name: Deploy validated release to WordPress.org SVN (irreversible public release)
-        if: ${{ (github.event_name == 'workflow_dispatch' && inputs.mode == 'publish') || (github.event_name == 'push' && github.event.head_commit.message == 'release(kadirslot): one-time authorized WordPress.org 1.1.3 publish') }}
+        if: "${{ (github.event_name == 'workflow_dispatch' && inputs.mode == 'publish') || (github.event_name == 'push' && github.event.head_commit.message == 'release(kadirslot): one-time authorized WordPress.org 1.1.3 publish') }}"
         env:
           SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
           SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
@@ -158,7 +158,7 @@ jobs:
 
 
       - name: Verify SVN release tag after publication
-        if: ${{ (github.event_name == 'workflow_dispatch' && inputs.mode == 'publish') || (github.event_name == 'push' && github.event.head_commit.message == 'release(kadirslot): one-time authorized WordPress.org 1.1.3 publish') }}
+        if: "${{ (github.event_name == 'workflow_dispatch' && inputs.mode == 'publish') || (github.event_name == 'push' && github.event.head_commit.message == 'release(kadirslot): one-time authorized WordPress.org 1.1.3 publish') }}"
         run: |
           test "$(svn cat "$SVN_URL/tags/$RELEASE_VERSION/readme.txt" | sed -n 's/^Stable tag: *//p' | head -n 1 | tr -d '\r')" = "$RELEASE_VERSION"
           echo "WordPress.org SVN tag $RELEASE_VERSION confirmed. Directory listing updates may lag."
