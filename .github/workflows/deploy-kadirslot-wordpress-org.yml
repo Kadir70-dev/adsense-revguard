@@ -137,9 +137,21 @@ jobs:
           svn copy "$WC/trunk" "$WC/tags/$RELEASE_VERSION"
           echo "SVN changes to be published:"
           svn status "$WC"
-          svn commit "$WC" --non-interactive --no-auth-cache \
+          # Use a captured SVN response so authentication failures produce specific, safe instructions.
+          if ! svn commit "$WC" --non-interactive --no-auth-cache \
             --username "$SVN_USERNAME" --password "$SVN_PASSWORD" \
-            -m "KadirSlot Ad Placement $RELEASE_VERSION: branded shortcode, docs and discoverability"
+            -m "KadirSlot Ad Placement $RELEASE_VERSION: branded shortcode, docs and discoverability" \
+            > "$RUNNER_TEMP/kadirslot-svn-commit.log" 2>&1; then
+            if grep -qE 'E215004|Authentication failed|No more credentials' "$RUNNER_TEMP/kadirslot-svn-commit.log"; then
+              echo "::error title=WordPress.org SVN authentication rejected::Secrets exist, but WordPress.org rejected the SVN login. Confirm SVN_USERNAME uses the exact, case-sensitive WordPress.org committer login (the listed plugin contributor is abdulkadirco); generate a new SVN-specific password in WordPress.org Account & Security; replace the GitHub SVN_PASSWORD repository secret; confirm your WordPress.org account has 2FA and is a Committer for kadirslot-ad-placement. Generating a fresh SVN password invalidates earlier SVN passwords."
+            else
+              echo "::error title=WordPress.org SVN commit failed::The server rejected the commit; inspect redacted SVN error codes and contact the WordPress.org Plugin Team if permissions are correct."
+            fi
+            grep -E 'svn: E[0-9]+|Authentication failed|Access forbidden|Commit failed' "$RUNNER_TEMP/kadirslot-svn-commit.log" || true
+            exit 1
+          fi
+          echo "SVN commit accepted. Verifying published versioned tag next."
+
 
       - name: Verify SVN release tag after publication
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.mode == 'publish' }}
